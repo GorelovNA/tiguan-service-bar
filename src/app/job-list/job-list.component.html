@@ -1,1 +1,93 @@
-<p>job-list works!</p>
+<table mat-table [dataSource]="kmJobs" #table1 matSort
+    class="mat-elevation-z8">
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
+     Название
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="colorType">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by colorType">
+      Вид работ
+    </th>
+    <td mat-cell *matCellDef="let element"> {{ element.colorType === colorType.Prisadka ? 'Присадка' : 'Замена' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="planValue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by planValue">
+      План
+    </th>
+    <td mat-cell *matCellDef="let element">
+        {{ element.justOnce ? 'На' : 'Каждые' }}
+        {{element.planValue}} т.км
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
+      Комментарий
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by createDate">
+      Дата создания
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.createDate | date}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
+
+<table mat-table [dataSource]="timeJobs" #table2 matSort
+    class="mat-elevation-z8">
+
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by title">
+     Название
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="colorType">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by colorType">
+      Вид работ
+    </th>
+    <td mat-cell *matCellDef="let element"> {{ element.colorType === colorType.Prisadka ? 'Присадка' : 'Замена' }} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="planValue">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by planValue">
+      План
+    </th>
+    <td mat-cell *matCellDef="let element">
+        {{ element.justOnce ? 'На' : 'Каждые' }}
+        {{element.planValue}} т.км
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="description">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
+      Комментарий
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="createDate">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by createDate">
+      Дата создания
+    </th>
+    <td mat-cell *matCellDef="let element"> {{element.createDate | date}} </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
