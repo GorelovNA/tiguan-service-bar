@@ -20,7 +20,7 @@ export class AppComponent implements OnInit {
         private appService: AppService
     ) { }
 
-    ngOnInit() {
+    ngOnInit(): void {
         this.appService.getList().subscribe(res => {
             this.jobList = res;
 
@@ -28,18 +28,39 @@ export class AppComponent implements OnInit {
         });
     }
 
-    add() {
-        const dialogRef = this.dialog.open(JobEditDialogComponent);
+    add(): void {
+        this.openJobDialog();
+    }
+
+    onEdit(id: string): void {
+        this.openJobDialog(this.jobList.find(j => j.id === id));
+    }
+
+    onDelete(id: string): void {
+        this.jobList = this.jobList.filter(j => j.id !== id);
+    }
+
+    private openJobDialog(job: Job | null = null): void {
+        const dialogRef = this.dialog.open(JobEditDialogComponent, {
+            data: job
+        });
 
         dialogRef.afterClosed().pipe(
             filter(r => !!r)
         )
             .subscribe(result => {
                 console.log(`Dialog result: `, JSON.stringify(result));
-                this.jobList = [
-                    ...this.jobList,
-                    result
-                ];
+                const currJobIndex = this.jobList.findIndex(j => j.id === result?.id);
+
+                if (currJobIndex !== -1) {
+                    this.jobList.splice(currJobIndex, 1, result);
+                    this.jobList = [...this.jobList];
+                } else {
+                    this.jobList = [
+                        ...this.jobList,
+                        result
+                    ];
+                }
             });
     }
 }

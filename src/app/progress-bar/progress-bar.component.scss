@@ -1,0 +1,36 @@
+.items-container {
+    position: relative;
+    height: 30px;
+
+    .item {
+        position: absolute;
+        transform: translateX(-50%);
+
+        &:hover .preview {
+            display: block;
+        }
+
+        .preview {
+            display: none;
+            background-color: cadetblue;
+            padding: 20px;
+            border-radius: 8px;
+            transform: translateX(-50%);
+            left: 50%;
+            position: absolute;
+            bottom: 39px;
+
+            &::after {
+                content: "";
+                background-color: cadetblue;
+                width: 15px;
+                height: 15px;
+                display: block;
+                position: absolute;
+                bottom: -5px;
+                left: calc(50% - 10px);
+                transform: rotate(45deg);
+            }
+        }
+    }
+}

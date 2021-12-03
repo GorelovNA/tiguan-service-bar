@@ -1,3 +1,12 @@
-<app-job-list *ngIf="jobList?.length" [jobs]="jobList"></app-job-list>
+<app-job-list
+    *ngIf="jobList?.length"
+    [jobs]="jobList"
+    (edited)="onEdit($event)"
+    (deleted)="onDelete($event)"
+></app-job-list>
 
 <button mat-raised-button color="primary" (click)="add()">Add job</button>
+
+<br><br><br>
+
+<app-progress-bar [jobs]="jobList"></app-progress-bar>

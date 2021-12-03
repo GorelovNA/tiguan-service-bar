@@ -1,4 +1,5 @@
 export interface Job {
+    id: string;
     title: string;
     type: JobType;
     colorType: ColorType;

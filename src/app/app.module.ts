@@ -43,6 +43,7 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
 
 const MATERIAL = [
@@ -87,7 +88,8 @@ const MATERIAL = [
   declarations: [
     AppComponent,
     JobListComponent,
-    JobEditDialogComponent
+    JobEditDialogComponent,
+    ProgressBarComponent
   ],
   imports: [
     BrowserModule,

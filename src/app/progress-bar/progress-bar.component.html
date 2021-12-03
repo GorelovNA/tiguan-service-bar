@@ -1,0 +1,18 @@
+
+<div>
+    <div class="items-container">
+        <div class="item" *ngFor="let item of kmJobGraphItems" [style.left]="getItemMargin(item.value)">
+            <mat-icon color="primary">miscellaneous_services</mat-icon>
+            <div class="preview">
+                <h3>{{ item.title }}</h3>
+                <h4>Пробег: {{ item.value }} т.км</h4>
+                <ul>
+                    <li>{{ item.colorType === colorType.Prisadka ? 'Присадка' : 'Замена' }}</li>
+                    <li>Работы проводятся {{ item.justOnce ? 'на' : 'на каждые' }} {{ item.planValue }} т.км</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
+</div>

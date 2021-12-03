@@ -1,8 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IFormBuilder, IFormGroup } from '@rxweb/types';
 import { ColorType, Job, JobType } from '../shared/job.interface';
+import { v4 as uuidv4 } from 'uuid';
 
 @Component({
     selector: 'app-job-edit-dialog',
@@ -23,21 +24,24 @@ export class JobEditDialogComponent {
     constructor(
         private fb: FormBuilder,
         public dialogRef: MatDialogRef<JobEditDialogComponent>,
+        @Inject(MAT_DIALOG_DATA) public data: Job | null = null,
     ) {
         this.form = (this.fb as IFormBuilder).group<Job>({
-            title: ['', Validators.required],
-            type: [JobType.Km, Validators.required],
-            colorType: [ColorType.Zamena, Validators.required],
-            planValue: [null, Validators.required],
-            description: [''],
-            justOnce: [false],
+            id: [data?.id || uuidv4()],
+            title: [data?.title || '', Validators.required],
+            type: [!!data ? data.type : JobType.Km, Validators.required],
+            colorType: [data?.colorType || ColorType.Zamena, Validators.required],
+            planValue: [data?.planValue || null, Validators.required],
+            description: [data?.description || ''],
+            justOnce: [data?.justOnce || false],
         });
     }
 
     save() {
         this.dialogRef.close({
             ...this.form.getRawValue(),
-            createDate: new Date()
+            createDate: new Date(),
+
         });
     }
 

@@ -1,4 +1,4 @@
-import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { ColorType, Job, JobType } from '../shared/job.interface';
@@ -13,7 +13,17 @@ export class JobListComponent implements OnInit {
     @Input() set jobs(res: Job[]) {
         this.timeJobs = new MatTableDataSource(res.filter(r => r.type === JobType.Time));
         this.kmJobs = new MatTableDataSource(res.filter(r => r.type === JobType.Km));
+
+        if (this.sort1) {
+            this.kmJobs.sort = this.sort1;
+        }
+        if (this.sort2) {
+            this.timeJobs.sort = this.sort2;
+        }
     }
+
+    @Output() edited: EventEmitter<string> = new EventEmitter();
+    @Output() deleted: EventEmitter<string> = new EventEmitter();
 
     // @ts-ignore
     timeJobs: MatTableDataSource<Job>;
@@ -21,7 +31,7 @@ export class JobListComponent implements OnInit {
     kmJobs: MatTableDataSource<Job>;
 
 
-    displayedColumns: string[] = ['title', 'colorType', 'planValue', 'description', 'createDate'];
+    displayedColumns: string[] = ['title', 'colorType', 'planValue', 'description', 'createDate', 'id'];
 
     colorType = ColorType;
 
