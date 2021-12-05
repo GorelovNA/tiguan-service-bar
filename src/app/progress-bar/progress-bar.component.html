@@ -1,7 +1,22 @@
 
-<div>
+<div class="progress-bar">
+    <div class="scale-slider-container">
+        <mat-slider max="100" min="30" [(ngModel)]="kmScale">
+        </mat-slider>
+        <label>Масштаб: {{kmScale}} т.км</label>
+    </div>
+
+
+    <div class="progress-container">
+        <mat-progress-bar mode="determinate"
+            [value]="getItemMargin(currentKmValue)"
+            [style.width.%]="progreesBarWidth"
+        ></mat-progress-bar>
+        <img class="car" [style.left.%]="getItemMargin(currentKmValue)" src="assets/images/tiguan.png" alt="">
+    </div>
+
     <div class="items-container">
-        <div class="item" *ngFor="let item of kmJobGraphItems" [style.left]="getItemMargin(item.value)">
+        <div class="item" *ngFor="let item of kmJobGraphItems" [style.left]="getItemMargin(item.value) + '%'">
             <mat-icon color="primary">miscellaneous_services</mat-icon>
             <div class="preview">
                 <h3>{{ item.title }}</h3>
@@ -13,6 +28,4 @@
             </div>
         </div>
     </div>
-
-    <mat-progress-bar mode="determinate" value="40"></mat-progress-bar>
 </div>

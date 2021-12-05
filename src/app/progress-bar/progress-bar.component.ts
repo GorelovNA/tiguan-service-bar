@@ -17,12 +17,16 @@ interface JobGraphItem extends Job {
 })
 export class ProgressBarComponent implements OnInit {
 
-    kmScale = 100; // default scale = 100 t.km
-
     kmJobGraphItems: JobGraphItem[] = [];
     timeJobGraphItems: JobGraphItem[] = [];
 
     colorType = ColorType;
+
+    kmScale = 40; // default scale = 100 t.km
+
+    get progreesBarWidth(): number {
+        return (MAX_KM_SIZE / this.kmScale) * 100;
+    }
 
     @Input() set jobs(_jobs: Job[]) {
         const timeJobs = _jobs.filter(r => r.type === JobType.Time);
@@ -50,12 +54,14 @@ export class ProgressBarComponent implements OnInit {
         });
     }
 
+    @Input() currentKmValue: number = 15; // т.км
+
     constructor() { }
 
     ngOnInit(): void {
     }
 
-    getItemMargin(value: number): string {
-        return `${(value * 100) / this.kmScale}%`;
+    getItemMargin(value: number): number {
+        return (value * 100) / this.kmScale;
     }
 }

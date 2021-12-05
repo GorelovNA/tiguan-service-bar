@@ -1,36 +1,63 @@
-.items-container {
-    position: relative;
-    height: 30px;
+.progress-bar {
+    padding: 56px 0;
+    overflow-x: auto;
 
-    .item {
-        position: absolute;
-        transform: translateX(-50%);
+    .scale-slider-container {
+        margin-bottom: 50px;
 
-        &:hover .preview {
-            display: block;
+        label {
+            padding-left: 10px;
         }
+    }
 
-        .preview {
-            display: none;
-            background-color: cadetblue;
-            padding: 20px;
-            border-radius: 8px;
-            transform: translateX(-50%);
-            left: 50%;
+    .progress-container {
+        position: relative;
+
+        .car {
+            transform: rotateY(180deg) translateX(100%);
+            width: 130px;
             position: absolute;
-            bottom: 39px;
+            top: -49px;
+            left: 15%;
+        }
+    }
 
-            &::after {
-                content: "";
-                background-color: cadetblue;
-                width: 15px;
-                height: 15px;
+    .items-container {
+        position: relative;
+        height: 30px;
+        padding: 4px 0;
+
+        .item {
+            position: absolute;
+            transform: translateX(-50%);
+
+            &:hover .preview {
                 display: block;
+            }
+
+            .preview {
+                display: none;
+                background-color: cadetblue;
+                padding: 20px;
+                border-radius: 8px;
+                transform: translateX(-50%);
+                left: 50%;
                 position: absolute;
-                bottom: -5px;
-                left: calc(50% - 10px);
-                transform: rotate(45deg);
+                bottom: 39px;
+
+                &::after {
+                    content: "";
+                    background-color: cadetblue;
+                    width: 15px;
+                    height: 15px;
+                    display: block;
+                    position: absolute;
+                    bottom: -5px;
+                    left: calc(50% - 10px);
+                    transform: rotate(45deg);
+                }
             }
         }
     }
 }
+
