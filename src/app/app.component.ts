@@ -4,6 +4,9 @@ import { AppService } from './app.service';
 import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
 import { Job } from './shared/job.interface';
 import { filter } from 'rxjs/operators';
+import { Observable } from 'rxjs';
+
+const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
 
 @Component({
     selector: 'app-root',
@@ -11,9 +14,16 @@ import { filter } from 'rxjs/operators';
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    title = 'tiguan-service-bar';
+    allJobs$: Observable<Job[]> = this.appService.jobsSubject$.asObservable();
+    kmJobs$: Observable<Job[]> = this.appService.kmJobs$;
+    timeJobs$: Observable<Job[]> = this.appService.timeJobs$;
 
-    jobList: Job[] = [];
+    get jobList(): Job[] {
+        return this.appService.jobsSubject$.value;
+    }
+
+    readonly possTime: number = // время владения
+        this.monthDiff(TIGUAN_PURCHASE_DATE, new Date());
 
     constructor(
         private dialog: MatDialog,
@@ -22,9 +32,7 @@ export class AppComponent implements OnInit {
 
     ngOnInit(): void {
         this.appService.getList().subscribe(res => {
-            this.jobList = res;
-
-            console.log(res);
+            this.appService.jobsSubject$.next(res);
         });
     }
 
@@ -37,7 +45,7 @@ export class AppComponent implements OnInit {
     }
 
     onDelete(id: string): void {
-        this.jobList = this.jobList.filter(j => j.id !== id);
+        this.appService.jobsSubject$.next(this.jobList.filter(j => j.id !== id));
     }
 
     private openJobDialog(job: Job | null = null): void {
@@ -53,14 +61,23 @@ export class AppComponent implements OnInit {
                 const currJobIndex = this.jobList.findIndex(j => j.id === result?.id);
 
                 if (currJobIndex !== -1) {
-                    this.jobList.splice(currJobIndex, 1, result);
-                    this.jobList = [...this.jobList];
+                    const arr = [...this.jobList] ;
+                    arr.splice(currJobIndex, 1, result);
+                    this.appService.jobsSubject$.next(arr);
                 } else {
-                    this.jobList = [
+                    this.appService.jobsSubject$.next([
                         ...this.jobList,
                         result
-                    ];
+                    ]);
                 }
             });
+    }
+
+    private monthDiff(d1: Date, d2: Date): number {
+        let months;
+        months = (d2.getFullYear() - d1.getFullYear()) * 12;
+        months -= d1.getMonth();
+        months += d2.getMonth();
+        return months <= 0 ? 0 : months;
     }
 }

@@ -22,32 +22,39 @@ interface JobGraphDetails extends Job {
 })
 export class ProgressBarComponent implements OnInit {
 
-    kmJobGraphItems: JobGraphItem[] = [];
-    timeJobGraphItems: JobGraphItem[] = [];
+    jobGraphItems: JobGraphItem[] = [];
 
     colorType = ColorType;
-
-    kmScale = 40; // default scale = 100 t.km
+    graphScale = 0; // progress scale value (default: 40 tkm, 24mes)
+    jobType: JobType | null = null;
 
     scaleSteps: number[] = [];
 
+    get isKmType(): boolean {
+        return this.jobType === JobType.Km;
+    }
+
+    get MAX_VALUE(): number {
+        return this.isKmType ? MAX_KM_SIZE : MAX_TIME_SIZE;
+    }
+
     get progreesBarWidth(): number {
-        return (MAX_KM_SIZE / this.kmScale) * 100;
+        return (this.MAX_VALUE / this.graphScale) * 100;
     }
     get progreesBarValue(): number {
-        return (this.currentKmValue * 100) / MAX_KM_SIZE;
+        return (this.currentValue * 100) / this.MAX_VALUE;
     }
 
+    @Input() currentValue = 0; // текущий пробег / время владения
+
     @Input() set jobs(_jobs: Job[]) {
-        const timeJobs = _jobs.filter(r => r.type === JobType.Time);
-        const kmJobs = _jobs.filter(r => r.type === JobType.Km);
+        this.jobType = _jobs[0]?.type;
 
-        this.kmJobGraphItems = [];
-        this.timeJobGraphItems = [];
+        this.jobGraphItems = [];
 
-        kmJobs.forEach(j => {
+        _jobs.forEach(j => {
             if (j.justOnce) {
-                const sameValueItem = this.kmJobGraphItems.find(i => i.value === j.planValue);
+                const sameValueItem = this.jobGraphItems.find(i => i.value === j.planValue);
 
                 if (sameValueItem) {
                     sameValueItem.jobs.push({
@@ -55,7 +62,7 @@ export class ProgressBarComponent implements OnInit {
                         value: j.planValue
                     });
                 } else {
-                    this.kmJobGraphItems.push({
+                    this.jobGraphItems.push({
                         value: j.planValue,
                         jobs: [{
                             ...j,
@@ -65,8 +72,8 @@ export class ProgressBarComponent implements OnInit {
                 }
             } else {
                 let value = j.planValue;
-                while (value <= MAX_KM_SIZE) {
-                    const sameValueItem = this.kmJobGraphItems.find(i => i.value === value);
+                while (value <= this.MAX_VALUE) {
+                    const sameValueItem = this.jobGraphItems.find(i => i.value === value);
 
                     if (sameValueItem) {
                         sameValueItem.jobs.push({
@@ -74,7 +81,7 @@ export class ProgressBarComponent implements OnInit {
                             value
                         });
                     } else {
-                        this.kmJobGraphItems.push({
+                        this.jobGraphItems.push({
                             value,
                             jobs: [{
                                 ...j,
@@ -89,22 +96,21 @@ export class ProgressBarComponent implements OnInit {
         });
     }
 
-    @Input() currentKmValue: number = 15; // т.км
-
-    constructor() { }
-
     ngOnInit(): void {
-        let step = 5; // т.км
-        while (step <= MAX_KM_SIZE) {
-            this.scaleSteps.push(step);
-            step += 5;
+        this.graphScale = this.isKmType ? 40 : 24;
+
+        const step = this.isKmType ? 5 : 2; // т.км / мес
+        let value = step;
+        while (value <= MAX_KM_SIZE) {
+            this.scaleSteps.push(value);
+            value += step;
         }
 
         this.scrollToCurrent();
     }
 
     getItemMargin(value: number): number {
-        return (value * 100) / this.kmScale;
+        return (value * 100) / this.graphScale;
     }
 
     scrollToCurrent(): void {

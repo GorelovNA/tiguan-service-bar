@@ -24,9 +24,9 @@
         "title": "as fdfs sdfsdf",
         "type": 0,
         "colorType": 0,
-        "planValue": 36,
+        "planValue": 24,
         "description": "",
-        "justOnce": true,
+        "justOnce": false,
         "createDate": "2021-11-30T17:30:30.670Z"
     },
     {

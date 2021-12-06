@@ -2,9 +2,9 @@
 
 <div class="controls">
     <div class="scale-slider-container">
-        <mat-slider max="100" min="30" [(ngModel)]="kmScale">
+        <mat-slider [max]="isKmType ? 100 : 48" [min]="isKmType ? 30 : 18" [(ngModel)]="graphScale">
         </mat-slider>
-        <label>Масштаб: {{kmScale}} т.км</label>
+        <label>Масштаб: {{graphScale}} {{isKmType ? 'т.км' : 'мес'}}</label>
     </div>
     <button (click)="scrollToCurrent()" mat-stroked-button color="primary">Scroll to current</button>
 </div>
@@ -18,11 +18,11 @@
             [value]="progreesBarValue"
             [style.width.%]="progreesBarWidth"
         ></mat-progress-bar>
-        <img id="car" class="car" [style.left.%]="getItemMargin(currentKmValue)" src="assets/images/tiguan.png" alt="">
+        <img id="car" class="car" [style.left.%]="getItemMargin(currentValue)" src="assets/images/tiguan.png" alt="">
     </div>
 
     <div class="items-container">
-        <div class="item" *ngFor="let item of kmJobGraphItems" [style.left]="getItemMargin(item.value) + '%'" [ngbTooltip]="tipContent" container="body">
+        <div class="item" *ngFor="let item of jobGraphItems" [style.left]="getItemMargin(item.value) + '%'" [ngbTooltip]="tipContent" container="body">
             <mat-icon
                 [matBadge]="item.jobs.length"
                 matBadgeColor="warn"
@@ -30,10 +30,9 @@
                 color="primary"
             >miscellaneous_services</mat-icon>
 
-
             <ng-template #tipContent>
                 <div class="preview">
-                    <h2>Работы на пробеге: {{ item.value }} т.км</h2>
+                    <h2>Работы на пробеге: {{ item.value }} {{isKmType ? 'т.км' : 'мес'}}</h2>
                     <table mat-table [dataSource]="item.jobs">
                         <ng-container matColumnDef="title">
                         <th mat-header-cell *matHeaderCellDef> Название </th>
