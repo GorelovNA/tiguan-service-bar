@@ -1,31 +1,59 @@
 
-<div class="progress-bar">
+
+<div class="controls">
     <div class="scale-slider-container">
         <mat-slider max="100" min="30" [(ngModel)]="kmScale">
         </mat-slider>
         <label>Масштаб: {{kmScale}} т.км</label>
     </div>
+    <button (click)="scrollToCurrent()" mat-stroked-button color="primary">Scroll to current</button>
+</div>
 
-
+<div class="progress-bar-container">
     <div class="progress-container">
+        <div class="scale-steps-container">
+            <span *ngFor="let step of scaleSteps" class="scale-step" [style.left.%]="getItemMargin(step)">{{ step }}</span>
+        </div>
         <mat-progress-bar mode="determinate"
-            [value]="getItemMargin(currentKmValue)"
+            [value]="progreesBarValue"
             [style.width.%]="progreesBarWidth"
         ></mat-progress-bar>
-        <img class="car" [style.left.%]="getItemMargin(currentKmValue)" src="assets/images/tiguan.png" alt="">
+        <img id="car" class="car" [style.left.%]="getItemMargin(currentKmValue)" src="assets/images/tiguan.png" alt="">
     </div>
 
     <div class="items-container">
-        <div class="item" *ngFor="let item of kmJobGraphItems" [style.left]="getItemMargin(item.value) + '%'">
-            <mat-icon color="primary">miscellaneous_services</mat-icon>
-            <div class="preview">
-                <h3>{{ item.title }}</h3>
-                <h4>Пробег: {{ item.value }} т.км</h4>
-                <ul>
-                    <li>{{ item.colorType === colorType.Prisadka ? 'Присадка' : 'Замена' }}</li>
-                    <li>Работы проводятся {{ item.justOnce ? 'на' : 'на каждые' }} {{ item.planValue }} т.км</li>
-                </ul>
-            </div>
-        </div>
+        <div class="item" *ngFor="let item of kmJobGraphItems" [style.left]="getItemMargin(item.value) + '%'" [ngbTooltip]="tipContent" container="body">
+            <mat-icon
+                [matBadge]="item.jobs.length"
+                matBadgeColor="warn"
+                [matBadgeHidden]="item.jobs.length === 1"
+                color="primary"
+            >miscellaneous_services</mat-icon>
+
+
+            <ng-template #tipContent>
+                <div class="preview">
+                    <h2>Работы на пробеге: {{ item.value }} т.км</h2>
+                    <table mat-table [dataSource]="item.jobs">
+                        <ng-container matColumnDef="title">
+                        <th mat-header-cell *matHeaderCellDef> Название </th>
+                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="colorType">
+                        <th mat-header-cell *matHeaderCellDef> Вид работ </th>
+                        <td mat-cell *matCellDef="let element"> {{ element.colorType === colorType.Prisadka ? 'Присадка' : 'Замена' }} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="description">
+                        <th mat-header-cell *matHeaderCellDef> Комментарий </th>
+                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        </ng-container>
+
+                        <tr mat-header-row *matHeaderRowDef="[ 'title', 'colorType', 'description' ]"></tr>
+                        <tr mat-row *matRowDef="let row; columns: [ 'title', 'colorType', 'description' ];"></tr>
+                    </table>
+                </div>
+            </ng-template>
     </div>
 </div>
+
+

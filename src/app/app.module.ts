@@ -45,6 +45,7 @@ import { MatSliderModule } from '@angular/material/slider';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 
 const MATERIAL = [
@@ -99,7 +100,8 @@ const MATERIAL = [
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    ...MATERIAL
+    ...MATERIAL,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]

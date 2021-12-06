@@ -3,3 +3,23 @@
 body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
 }
+
+/* Importing Bootstrap SCSS file. */
+@import '~bootstrap/scss/bootstrap';
+
+
+.tooltip.show {
+    opacity: 1 !important;
+}
+
+.tooltip-inner {
+    max-width: none !important;
+
+    table {
+        min-width: 350px;
+
+        .mat-cell, .mat-header-cell {
+            padding: 0 15px;
+        }
+    }
+}

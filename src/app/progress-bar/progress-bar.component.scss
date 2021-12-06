@@ -1,14 +1,25 @@
-.progress-bar {
-    padding: 56px 0;
-    overflow-x: auto;
+.controls {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 50px;
+
+    & > * {
+        margin-right: 25px;
+    }
 
     .scale-slider-container {
-        margin-bottom: 50px;
-
         label {
             padding-left: 10px;
         }
     }
+}
+
+
+.progress-bar-container {
+    padding: 56px 0;
+    overflow-x: auto;
+    scroll-behavior: smooth;
 
     .progress-container {
         position: relative;
@@ -18,7 +29,22 @@
             width: 130px;
             position: absolute;
             top: -49px;
-            left: 15%;
+            left: 0%;
+            transition: left cubic-bezier(0, 0.95, 0.01, 0.96) 2s;
+        }
+
+        .scale-steps-container {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: -22px;
+            font-size: 11px;
+            color: rgba(63,81,181,0.5);
+
+            .scale-step {
+                position: absolute;
+                transform: translateX(-50%);
+            }
         }
     }
 
@@ -30,32 +56,10 @@
         .item {
             position: absolute;
             transform: translateX(-50%);
+            cursor: help;
 
             &:hover .preview {
                 display: block;
-            }
-
-            .preview {
-                display: none;
-                background-color: cadetblue;
-                padding: 20px;
-                border-radius: 8px;
-                transform: translateX(-50%);
-                left: 50%;
-                position: absolute;
-                bottom: 39px;
-
-                &::after {
-                    content: "";
-                    background-color: cadetblue;
-                    width: 15px;
-                    height: 15px;
-                    display: block;
-                    position: absolute;
-                    bottom: -5px;
-                    left: calc(50% - 10px);
-                    transform: rotate(45deg);
-                }
             }
         }
     }
