@@ -25,9 +25,10 @@ export class AppService {
 
     getList(): Observable<Job[]> {
         return this.http.get<Job[]>('assets/json/base.json').pipe(
-            mapTo(
-                JSON.parse(localStorage.getItem('jobs') || '[]')
-            ),
+            map((res) => {
+                const lsBase = JSON.parse(localStorage.getItem('jobs') || '[]');
+                return lsBase?.length ? lsBase : res;
+            }),
             tap(jobs => {
                 jobs.forEach(j => {
                     if (!j.complitedJobs) {
