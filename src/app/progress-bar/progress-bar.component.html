@@ -22,13 +22,13 @@
     </div>
 
     <div class="items-container">
-        <div class="item" *ngFor="let item of jobGraphItems" [style.left]="getItemMargin(item.value) + '%'" [ngbTooltip]="tipContent" container="body">
+        <div class="item" *ngFor="let item of jobGraphItems" [style.left]="getItemMargin(item.value) + '%'" [ngbTooltip]="tipContent" container="body" triggers="click" [autoClose]="'outside'">
+            <!-- [matBadge]="item.jobs.length"
+            matBadgeColor="warn"
+            [matBadgeHidden]="item.jobs.length === 1" -->
             <mat-icon
-                [matBadge]="item.jobs.length"
-                matBadgeColor="warn"
-                [matBadgeHidden]="item.jobs.length === 1"
                 color="primary"
-            >miscellaneous_services</mat-icon>
+            >{{ item.icon }}</mat-icon>
 
             <ng-template #tipContent>
                 <div class="preview">
@@ -44,15 +44,17 @@
                         </ng-container>
                         <ng-container matColumnDef="description">
                         <th mat-header-cell *matHeaderCellDef> Комментарий </th>
-                        <td mat-cell *matCellDef="let element"> {{element.description}} </td>
+                        <td mat-cell *matCellDef="let element" class="description-cell"> {{element.description}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="complited">
+                        <th mat-header-cell *matHeaderCellDef> Работы выполнены </th>
+                        <td mat-cell *matCellDef="let element" class="description-cell"><mat-checkbox [checked]="element.jobComplited" (change)="onCompliteChanged(element, $event)"></mat-checkbox></td>
                         </ng-container>
 
-                        <tr mat-header-row *matHeaderRowDef="[ 'title', 'colorType', 'description' ]"></tr>
-                        <tr mat-row *matRowDef="let row; columns: [ 'title', 'colorType', 'description' ];"></tr>
+                        <tr mat-header-row *matHeaderRowDef="[ 'title', 'colorType', 'description', 'complited' ]"></tr>
+                        <tr mat-row *matRowDef="let row; columns: [ 'title', 'colorType', 'description', 'complited' ];"></tr>
                     </table>
                 </div>
             </ng-template>
     </div>
 </div>
-
-

@@ -26,11 +26,20 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="delayValue">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by delayValue">
+            Начиная с
+        </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.delayValue || 0}} мес
+        </td>
+    </ng-container>
+
     <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
             Комментарий
         </th>
-        <td mat-cell *matCellDef="let element" [style.maxWidth]="'300px'"> {{element.description}} </td>
+        <td mat-cell *matCellDef="let element" [style.maxWidth]="'300px'" class="description-cell"> {{element.description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="createDate">
@@ -87,11 +96,20 @@
         </td>
     </ng-container>
 
+    <ng-container matColumnDef="delayValue">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by delayValue">
+            Начиная с
+        </th>
+        <td mat-cell *matCellDef="let element">
+            {{element.delayValue || 0}} т.км
+        </td>
+    </ng-container>
+
     <ng-container matColumnDef="description">
         <th mat-header-cell *matHeaderCellDef mat-sort-header sortActionDescription="Sort by description">
             Комментарий
         </th>
-        <td mat-cell *matCellDef="let element" [style.maxWidth]="'300px'"> {{element.description}} </td>
+        <td mat-cell *matCellDef="let element" [style.maxWidth]="'300px'" class="description-cell"> {{element.description}} </td>
     </ng-container>
 
     <ng-container matColumnDef="createDate">

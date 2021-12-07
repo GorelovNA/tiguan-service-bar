@@ -21,9 +21,13 @@
             <mat-label>Plan value, {{ type === jobType.Time ? 'мес' : 'т.км' }}</mat-label>
             <input matInput type="number" formControlName="planValue">
         </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>(Optional) Delay value, {{ type === jobType.Time ? 'мес' : 'т.км' }}</mat-label>
+            <input matInput type="number" formControlName="delayValue">
+        </mat-form-field>
 
         <mat-form-field appearance="fill">
-            <mat-label>Description</mat-label>
+            <mat-label>(Optional) Description</mat-label>
             <textarea matInput formControlName="description"></textarea>
         </mat-form-field>
 

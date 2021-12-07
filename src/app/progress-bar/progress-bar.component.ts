@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 import { ColorType, Job, JobType } from '../shared/job.interface';
 
 
@@ -8,11 +9,13 @@ export const MAX_TIME_SIZE = 84; // мес (7лет)
 interface JobGraphItem {
     value: number; // итоговый пробег / время
     jobs: JobGraphDetails[]; // работы на данном пробеге / времени
+    icon: string;
 }
 
 
-interface JobGraphDetails extends Job {
+export interface JobGraphDetails extends Job {
     value: number; // итоговый пробег / время
+    jobComplited: boolean;
 }
 
 @Component({
@@ -54,54 +57,74 @@ export class ProgressBarComponent implements OnInit {
 
         _jobs.forEach(j => {
             if (j.justOnce) {
-                const sameValueItem = this.jobGraphItems.find(i => i.value === j.planValue);
+                const value = j.delayValue || j.planValue;
+                const sameValueItem = this.jobGraphItems.find(i => i.value === value);
 
                 if (sameValueItem) {
                     sameValueItem.jobs.push({
                         ...j,
-                        value: j.planValue
+                        value,
+                        jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false,
                     });
+                    sameValueItem.icon = this.getJobIcon(sameValueItem);
                 } else {
-                    this.jobGraphItems.push({
-                        value: j.planValue,
+                    const item: JobGraphItem = {
+                        value,
                         jobs: [{
                             ...j,
-                            value: j.planValue
-                        }]
+                            value,
+                            jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
+                        }],
+                        icon: ''
+                    };
+                    this.jobGraphItems.push({
+                        ...item,
+                        icon: this.getJobIcon(item)
                     });
                 }
             } else {
-                let value = j.planValue;
+                const planValue = j.planValue;
+                let value = j.delayValue || planValue;
                 while (value <= this.MAX_VALUE) {
                     const sameValueItem = this.jobGraphItems.find(i => i.value === value);
 
                     if (sameValueItem) {
                         sameValueItem.jobs.push({
                             ...j,
-                            value
+                            value,
+                            jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
                         });
+                        sameValueItem.icon = this.getJobIcon(sameValueItem);
                     } else {
-                        this.jobGraphItems.push({
+                        const item: JobGraphItem = {
                             value,
                             jobs: [{
                                 ...j,
-                                value
-                            }]
+                                value,
+                                jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
+                            }],
+                            icon: ''
+                        };
+                        this.jobGraphItems.push({
+                            ...item,
+                            icon: this.getJobIcon(item)
                         });
                     }
 
-                    value += j.planValue;
+                    value += planValue;
                 }
             }
         });
     }
+
+    @Output() jobCompliteChanged: EventEmitter<{ job: JobGraphDetails, checked: boolean }> = new EventEmitter();
 
     ngOnInit(): void {
         this.graphScale = this.isKmType ? 40 : 24;
 
         const step = this.isKmType ? 5 : 2; // т.км / мес
         let value = step;
-        while (value <= MAX_KM_SIZE) {
+        while (value <= this.MAX_VALUE) {
             this.scaleSteps.push(value);
             value += step;
         }
@@ -115,5 +138,30 @@ export class ProgressBarComponent implements OnInit {
 
     scrollToCurrent(): void {
         document.getElementById('car')?.scrollIntoView();
+    }
+
+    onCompliteChanged(job: JobGraphDetails, event: MatCheckboxChange): void {
+        job.jobComplited = event.checked;
+
+        this.jobCompliteChanged.emit({
+            job,
+            checked: event.checked
+        });
+    }
+
+    private getJobIcon(item: JobGraphItem): string {
+        if (item.jobs.length > 1) {
+            if (item.jobs.length > 9) {
+                return 'filter_9_plus';
+            }
+            return `filter_${item.jobs.length}`;
+        }
+
+        if (item.jobs[0]?.colorType === ColorType.Prisadka) {
+            return 'sanitizer';
+        }
+
+        // return 'settings';
+        return 'miscellaneous_services';
     }
 }

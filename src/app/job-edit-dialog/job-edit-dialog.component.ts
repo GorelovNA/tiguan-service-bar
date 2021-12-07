@@ -32,8 +32,10 @@ export class JobEditDialogComponent {
             type: [!!data ? data.type : JobType.Km, Validators.required],
             colorType: [data?.colorType || ColorType.Zamena, Validators.required],
             planValue: [data?.planValue || null, Validators.required],
+            delayValue: [data?.delayValue || null],
             description: [data?.description || ''],
             justOnce: [data?.justOnce || false],
+            complitedJobs: [[]]
         });
     }
 

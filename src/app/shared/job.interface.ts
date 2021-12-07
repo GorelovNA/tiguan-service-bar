@@ -4,9 +4,11 @@ export interface Job {
     type: JobType;
     colorType: ColorType;
     planValue: number;
+    delayValue?: number;
     description?: string;
     justOnce?: boolean;
     createDate?: Date;
+    complitedJobs: { value: number }[]; // работа выполнена на пробеге/времени value
 }
 
 export enum ColorType {

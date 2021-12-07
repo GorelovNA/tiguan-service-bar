@@ -20,6 +20,10 @@ body {
 
         .mat-cell, .mat-header-cell {
             padding: 0 15px;
+
+            &.description-cell {
+                white-space: pre-line;
+            }
         }
     }
 }

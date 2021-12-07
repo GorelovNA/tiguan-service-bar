@@ -10,10 +10,10 @@
 <br><br><br>
 
 <ng-container *ngIf="(kmJobs$ | async) as kmJobs">
-    <app-progress-bar *ngIf="kmJobs.length" [jobs]="kmJobs" [currentValue]="15"></app-progress-bar>
+    <app-progress-bar *ngIf="kmJobs.length" [jobs]="kmJobs" [currentValue]="15.5" (jobCompliteChanged)="onJobCompliteChanged($event)"></app-progress-bar>
 </ng-container>
 <hr>
 <ng-container *ngIf="(timeJobs$ | async) as timeJobs">
-    <app-progress-bar *ngIf="timeJobs.length" [jobs]="timeJobs" [currentValue]="possTime"></app-progress-bar>
+    <app-progress-bar *ngIf="timeJobs.length" [jobs]="timeJobs" [currentValue]="possTime" (jobCompliteChanged)="onJobCompliteChanged($event)"></app-progress-bar>
 </ng-container>
 

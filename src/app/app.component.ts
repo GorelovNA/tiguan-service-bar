@@ -5,6 +5,7 @@ import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.compon
 import { Job } from './shared/job.interface';
 import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
+import { JobGraphDetails } from './progress-bar/progress-bar.component';
 
 const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
 
@@ -34,6 +35,10 @@ export class AppComponent implements OnInit {
         this.appService.getList().subscribe(res => {
             this.appService.jobsSubject$.next(res);
         });
+
+        this.appService.jobsSubject$.subscribe(res => {
+            this.saveJobsToLS(res);
+        });
     }
 
     add(): void {
@@ -46,6 +51,17 @@ export class AppComponent implements OnInit {
 
     onDelete(id: string): void {
         this.appService.jobsSubject$.next(this.jobList.filter(j => j.id !== id));
+    }
+
+    onJobCompliteChanged(event: { job: JobGraphDetails, checked: boolean }) {
+        const existedJob = this.jobList.find(j => j.id === event.job.id);
+        if (!event.checked) {
+            existedJob!.complitedJobs = existedJob!.complitedJobs.filter(c => c.value !== event.job.value);
+        } else {
+            existedJob!.complitedJobs.push({ value: event.job.value });
+        }
+
+        this.saveJobsToLS(this.jobList);
     }
 
     private openJobDialog(job: Job | null = null): void {
@@ -79,5 +95,9 @@ export class AppComponent implements OnInit {
         months -= d1.getMonth();
         months += d2.getMonth();
         return months <= 0 ? 0 : months;
+    }
+
+    private saveJobsToLS(jobs: Job[]): void {
+        localStorage.setItem('jobs', JSON.stringify(jobs));
     }
 }

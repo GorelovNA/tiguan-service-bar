@@ -31,7 +31,7 @@ export class JobListComponent implements OnInit {
     kmJobs: MatTableDataSource<Job>;
 
 
-    displayedColumns: string[] = ['title', 'colorType', 'planValue', 'description', 'createDate', 'id'];
+    displayedColumns: string[] = ['title', 'colorType', 'planValue', 'delayValue', 'description', 'createDate', 'id'];
 
     colorType = ColorType;
 
