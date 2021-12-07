@@ -1,5 +1,9 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { IFormControl } from '@rxweb/types';
+import { debounceTime } from 'rxjs/operators';
+import { TIGUAN_PURCHASE_DATE } from '../app.component';
 import { ColorType, Job, JobType } from '../shared/job.interface';
 
 
@@ -31,7 +35,9 @@ export class ProgressBarComponent implements OnInit {
     graphScale = 0; // progress scale value (default: 40 tkm, 24mes)
     jobType: JobType | null = null;
 
-    scaleSteps: number[] = [];
+    scaleSteps: { value: number; text: string | Date }[] = [];
+
+    currentValueCtrl: IFormControl<number> = new FormControl(0);
 
     get isKmType(): boolean {
         return this.jobType === JobType.Km;
@@ -48,7 +54,13 @@ export class ProgressBarComponent implements OnInit {
         return (this.currentValue * 100) / this.MAX_VALUE;
     }
 
-    @Input() currentValue = 0; // текущий пробег / время владения
+    @Input() set currentValue(value: number) { // текущий пробег / время владения
+        this.currentValueCtrl.setValue(value || 0);
+    }
+
+    get currentValue(): number {
+        return this.currentValueCtrl.value!;
+    }
 
     @Input() set jobs(_jobs: Job[]) {
         this.jobType = _jobs[0]?.type;
@@ -119,13 +131,23 @@ export class ProgressBarComponent implements OnInit {
 
     @Output() jobCompliteChanged: EventEmitter<{ job: JobGraphDetails, checked: boolean }> = new EventEmitter();
 
+    constructor(private element: ElementRef<HTMLElement>) {}
+
     ngOnInit(): void {
-        this.graphScale = this.isKmType ? 40 : 24;
+        this.currentValueCtrl.valueChanges.pipe(
+            debounceTime(1000)
+        )
+        .subscribe(() => this.scrollToCurrent());
+
+        this.graphScale = this.isKmType ? 40 : 36;
 
         const step = this.isKmType ? 5 : 2; // т.км / мес
         let value = step;
+        const startDate = new Date(TIGUAN_PURCHASE_DATE.getTime());
         while (value <= this.MAX_VALUE) {
-            this.scaleSteps.push(value);
+            const text = this.isKmType ? value + ' т.км' : new Date(startDate.setMonth(startDate.getMonth() + step));
+
+            this.scaleSteps.push({ value, text });
             value += step;
         }
 
@@ -136,8 +158,14 @@ export class ProgressBarComponent implements OnInit {
         return (value * 100) / this.graphScale;
     }
 
-    scrollToCurrent(): void {
-        document.getElementById('car')?.scrollIntoView();
+    scrollToCurrent(additionalScrollValue?: number): void {
+
+        this.element.nativeElement.querySelector('#car')?.scrollIntoView();
+
+        console.log(this.element.nativeElement.querySelector('#scrollBlock'));
+        if (additionalScrollValue) {
+            this.element.nativeElement.querySelector('#scrollBlock');
+        }
     }
 
     onCompliteChanged(job: JobGraphDetails, event: MatCheckboxChange): void {
@@ -149,12 +177,14 @@ export class ProgressBarComponent implements OnInit {
         });
     }
 
+    getDateByValue(value: number): Date {
+        const startDate = new Date(TIGUAN_PURCHASE_DATE.getTime());
+        return new Date(startDate.setMonth(startDate.getMonth() + value));
+    }
+
     private getJobIcon(item: JobGraphItem): string {
         if (item.jobs.length > 1) {
-            if (item.jobs.length > 9) {
-                return 'filter_9_plus';
-            }
-            return `filter_${item.jobs.length}`;
+            return `miscellaneous_services`;
         }
 
         if (item.jobs[0]?.colorType === ColorType.Prisadka) {

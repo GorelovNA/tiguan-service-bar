@@ -7,7 +7,7 @@ import { filter } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { JobGraphDetails } from './progress-bar/progress-bar.component';
 
-const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
+export const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
 
 @Component({
     selector: 'app-root',

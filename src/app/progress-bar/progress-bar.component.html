@@ -6,13 +6,19 @@
         </mat-slider>
         <label>Масштаб: {{graphScale}} {{isKmType ? 'т.км' : 'мес'}}</label>
     </div>
+    <div *ngIf="isKmType">
+        <mat-form-field appearance="outline">
+            <mat-label>Текущий пробег</mat-label>
+            <input matInput [formControl]="currentValueCtrl" type="number" placeholder="Например: 30 (т.км)">
+          </mat-form-field>
+    </div>
     <button (click)="scrollToCurrent()" mat-stroked-button color="primary">Scroll to current</button>
 </div>
 
-<div class="progress-bar-container">
+<div class="progress-bar-container" id="scrollBlock">
     <div class="progress-container">
         <div class="scale-steps-container">
-            <span *ngFor="let step of scaleSteps" class="scale-step" [style.left.%]="getItemMargin(step)">{{ step }}</span>
+            <span *ngFor="let step of scaleSteps" class="scale-step" [style.left.%]="getItemMargin(step.value)">{{ isKmType ? step.text : step.text | date:'MMM y' }}</span>
         </div>
         <mat-progress-bar mode="determinate"
             [value]="progreesBarValue"
@@ -23,16 +29,18 @@
 
     <div class="items-container">
         <div class="item" *ngFor="let item of jobGraphItems" [style.left]="getItemMargin(item.value) + '%'" [ngbTooltip]="tipContent" container="body" triggers="click" [autoClose]="'outside'">
-            <!-- [matBadge]="item.jobs.length"
-            matBadgeColor="warn"
-            [matBadgeHidden]="item.jobs.length === 1" -->
             <mat-icon
+                [matBadge]="item.jobs.length"
+                matBadgeColor="warn"
+                matBadgeSize="small"
+                [matBadgeHidden]="item.jobs.length === 1"
                 color="primary"
             >{{ item.icon }}</mat-icon>
 
             <ng-template #tipContent>
                 <div class="preview">
                     <h2>Работы на пробеге: {{ item.value }} {{isKmType ? 'т.км' : 'мес'}}</h2>
+                    <h3 *ngIf="!isKmType">{{ getDateByValue(item.value) | date:'MMM y' }}</h3>
                     <table mat-table [dataSource]="item.jobs">
                         <ng-container matColumnDef="title">
                         <th mat-header-cell *matHeaderCellDef> Название </th>

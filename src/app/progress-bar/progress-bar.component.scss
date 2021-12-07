@@ -43,7 +43,9 @@
 
             .scale-step {
                 position: absolute;
-                transform: translateX(-50%);
+                transform: rotate(-36deg) translate(-1px, -14px);
+                white-space: nowrap;
+                user-select: none;
             }
         }
     }
@@ -51,12 +53,13 @@
     .items-container {
         position: relative;
         height: 30px;
-        padding: 4px 0;
+        padding: 2px 0;
 
         .item {
             position: absolute;
             transform: translateX(-50%);
             cursor: pointer;
+            user-select: none;
         }
     }
 }
