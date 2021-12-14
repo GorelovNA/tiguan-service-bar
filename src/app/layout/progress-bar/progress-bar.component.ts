@@ -2,9 +2,11 @@ import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@ang
 import { FormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { IFormControl } from '@rxweb/types';
+import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { TIGUAN_PURCHASE_DATE } from '../app.component';
-import { ColorType, Job, JobType } from '../shared/job.interface';
+import { AuthService } from 'src/app/core/auth.service';
+import { Job, ColorType, JobType } from '../../shared/job.interface';
+import { TIGUAN_PURCHASE_DATE } from '../layout.component';
 
 
 export const MAX_KM_SIZE = 300; // т.км
@@ -29,6 +31,7 @@ export interface JobGraphDetails extends Job {
     styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent implements OnInit {
+    isAdmin$: Observable<boolean> = this.authService.isAdmin$;
 
     jobGraphItems: JobGraphItem[] = [];
 
@@ -140,7 +143,10 @@ export class ProgressBarComponent implements OnInit {
 
     @Output() jobCompliteChanged: EventEmitter<{ job: JobGraphDetails, checked: boolean }> = new EventEmitter();
 
-    constructor(private element: ElementRef<HTMLElement>) {}
+    constructor(
+        private element: ElementRef<HTMLElement>,
+        private authService: AuthService
+    ) {}
 
     ngOnInit(): void {
         this.currentValueCtrl.valueChanges.pipe(

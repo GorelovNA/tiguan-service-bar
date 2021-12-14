@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IFormBuilder, IFormGroup } from '@rxweb/types';
-import { ColorType, Job, JobType } from '../shared/job.interface';
+import { Job, JobType, ColorType } from '../../shared/job.interface';
 import { v4 as uuidv4 } from 'uuid';
 
 @Component({

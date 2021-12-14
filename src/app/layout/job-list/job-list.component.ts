@@ -1,7 +1,9 @@
 import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-import { ColorType, Job, JobType } from '../shared/job.interface';
+import { Observable } from 'rxjs';
+import { AuthService } from 'src/app/core/auth.service';
+import { Job, JobType, ColorType } from '../../shared/job.interface';
 
 @Component({
     selector: 'app-job-list',
@@ -25,6 +27,8 @@ export class JobListComponent implements OnInit {
     @Output() edited: EventEmitter<string> = new EventEmitter();
     @Output() deleted: EventEmitter<string> = new EventEmitter();
 
+    isAdmin$: Observable<boolean> = this.authService.isAdmin$;
+
     // @ts-ignore
     timeJobs: MatTableDataSource<Job>;
     // @ts-ignore
@@ -40,6 +44,8 @@ export class JobListComponent implements OnInit {
     @ViewChild('table1', { static: false, read: MatSort }) sort1: MatSort;
     // @ts-ignore
     @ViewChild('table2', { static: false, read: MatSort }) sort2: MatSort;
+
+    constructor(private authService: AuthService) { }
 
     ngAfterViewInit() {
       this.kmJobs.sort = this.sort1;
