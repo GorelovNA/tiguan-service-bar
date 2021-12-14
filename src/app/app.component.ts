@@ -15,12 +15,14 @@ export const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
     styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-    allJobs$: Observable<Job[]> = this.appService.jobsSubject$.asObservable();
+    allJobs$: Observable<Job[]> = this.appService.jobsSubject$.asObservable().pipe(
+        filter((jobs): jobs is Job[] => !!jobs),
+    );
     kmJobs$: Observable<Job[]> = this.appService.kmJobs$;
     timeJobs$: Observable<Job[]> = this.appService.timeJobs$;
 
     get jobList(): Job[] {
-        return this.appService.jobsSubject$.value;
+        return this.appService.jobsSubject$.value || [];
     }
 
     readonly possTime: number = // время владения
@@ -37,7 +39,9 @@ export class AppComponent implements OnInit {
         });
 
         this.appService.jobsSubject$.subscribe(res => {
-            this.saveJobsToLS(res);
+            if (res) {
+                this.saveJobsToLS(res);
+            }
         });
     }
 

@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, mapTo, tap } from 'rxjs/operators';
+import { filter, map, tap } from 'rxjs/operators';
 import { Job, JobType } from './shared/job.interface';
 
 @Injectable({
@@ -9,16 +9,18 @@ import { Job, JobType } from './shared/job.interface';
 })
 export class AppService {
 
-    jobsSubject$: BehaviorSubject<Job[]> = new BehaviorSubject<Job[]>([]);
+    jobsSubject$: BehaviorSubject<Job[] | null> = new BehaviorSubject<Job[] | null>(null);
 
     kmJobs$: Observable<Job[]>;
     timeJobs$: Observable<Job[]>;
 
     constructor(private http: HttpClient) {
         this.kmJobs$ = this.jobsSubject$.asObservable().pipe(
+            filter((jobs): jobs is Job[] => !!jobs),
             map(jobs => jobs.filter(j => j.type === JobType.Km))
         );
         this.timeJobs$ = this.jobsSubject$.asObservable().pipe(
+            filter((jobs): jobs is Job[] => !!jobs),
             map(jobs => jobs.filter(j => j.type === JobType.Time))
         );
     }

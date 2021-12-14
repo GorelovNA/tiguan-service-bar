@@ -14,6 +14,7 @@ interface JobGraphItem {
     value: number; // итоговый пробег / время
     jobs: JobGraphDetails[]; // работы на данном пробеге / времени
     icon: string;
+    complited: boolean;
 }
 
 
@@ -79,15 +80,19 @@ export class ProgressBarComponent implements OnInit {
                         jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false,
                     });
                     sameValueItem.icon = this.getJobIcon(sameValueItem);
+                    sameValueItem.complited = sameValueItem.jobs.every(j => j.jobComplited);
                 } else {
+                    const job: JobGraphDetails = {
+                        ...j,
+                        value,
+                        jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
+                    };
+
                     const item: JobGraphItem = {
                         value,
-                        jobs: [{
-                            ...j,
-                            value,
-                            jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
-                        }],
-                        icon: ''
+                        jobs: [job],
+                        icon: '',
+                        complited: job.jobComplited
                     };
                     this.jobGraphItems.push({
                         ...item,
@@ -107,15 +112,19 @@ export class ProgressBarComponent implements OnInit {
                             jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
                         });
                         sameValueItem.icon = this.getJobIcon(sameValueItem);
+                        sameValueItem.complited = sameValueItem.jobs.every(j => j.jobComplited);
                     } else {
+                        const job: JobGraphDetails = {
+                            ...j,
+                            value,
+                            jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
+                        };
+
                         const item: JobGraphItem = {
                             value,
-                            jobs: [{
-                                ...j,
-                                value,
-                                jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
-                            }],
-                            icon: ''
+                            jobs: [job],
+                            icon: '',
+                            complited: job.jobComplited
                         };
                         this.jobGraphItems.push({
                             ...item,
@@ -168,8 +177,10 @@ export class ProgressBarComponent implements OnInit {
         }
     }
 
-    onCompliteChanged(job: JobGraphDetails, event: MatCheckboxChange): void {
+    onCompliteChanged(item: JobGraphItem, job: JobGraphDetails, event: MatCheckboxChange): void {
         job.jobComplited = event.checked;
+        item.complited = item.jobs.every(j => j.jobComplited);
+
 
         this.jobCompliteChanged.emit({
             job,

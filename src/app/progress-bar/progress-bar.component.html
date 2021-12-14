@@ -35,6 +35,7 @@
                 matBadgeSize="small"
                 [matBadgeHidden]="item.jobs.length === 1"
                 color="primary"
+                [class.complited]="item.complited"
             >{{ item.icon }}</mat-icon>
 
             <ng-template #tipContent>
@@ -56,7 +57,7 @@
                         </ng-container>
                         <ng-container matColumnDef="complited">
                         <th mat-header-cell *matHeaderCellDef> Работы выполнены </th>
-                        <td mat-cell *matCellDef="let element" class="description-cell"><mat-checkbox [checked]="element.jobComplited" (change)="onCompliteChanged(element, $event)"></mat-checkbox></td>
+                        <td mat-cell *matCellDef="let element" class="description-cell"><mat-checkbox [checked]="element.jobComplited" (change)="onCompliteChanged(item, element, $event)"></mat-checkbox></td>
                         </ng-container>
 
                         <tr mat-header-row *matHeaderRowDef="[ 'title', 'colorType', 'description', 'complited' ]"></tr>
