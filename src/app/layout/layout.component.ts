@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, skip } from 'rxjs/operators';
+import { filter, skip, takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '../core/auth.service';
 import { Job } from '../shared/job.interface';
 import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
 import { JobGraphDetails } from './progress-bar/progress-bar.component';
 import { JobsService } from '../core/jobs.service';
+import { BaseComponent } from '../shared/base.class';
 
 export const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
 
@@ -15,7 +16,7 @@ export const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
     templateUrl: './layout.component.html',
     styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent implements OnInit {
+export class LayoutComponent extends BaseComponent implements OnInit {
     allJobs$: Observable<Job[]> = this.jobsService.jobsSubject$.asObservable().pipe(
         filter((jobs): jobs is Job[] => !!jobs),
     );
@@ -37,16 +38,19 @@ export class LayoutComponent implements OnInit {
         private dialog: MatDialog,
         private jobsService: JobsService,
         private authService: AuthService,
-    ) { }
+    ) {
+        super();
+     }
 
     ngOnInit(): void {
-        this.jobsService.getList().subscribe(res => {
+        this.jobsService.getList().pipe(takeUntil(this.destroy$)).subscribe(res => {
             this.jobsService.jobsSubject$.next(res);
         });
 
         this.jobsService.jobsSubject$.pipe(
             filter((jobs): jobs is Job[] => !!jobs),
-            skip(1)
+            skip(1),
+            takeUntil(this.destroy$)
         ).subscribe(res => {
             this.saveJobs(res);
         });
@@ -85,7 +89,8 @@ export class LayoutComponent implements OnInit {
         });
 
         dialogRef.afterClosed().pipe(
-            filter(r => !!r)
+            filter(r => !!r),
+            takeUntil(this.destroy$)
         )
             .subscribe(result => {
                 console.log(`Dialog result: `, JSON.stringify(result));
@@ -113,6 +118,6 @@ export class LayoutComponent implements OnInit {
     }
 
     private saveJobs(jobs: Job[]): void {
-        this.jobsService.updateList(jobs).subscribe();
+        this.jobsService.updateList(jobs).pipe(takeUntil(this.destroy$)).subscribe();
     }
 }

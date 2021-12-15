@@ -3,7 +3,8 @@ import { FormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { IFormControl } from '@rxweb/types';
 import { Observable } from 'rxjs';
-import { debounceTime } from 'rxjs/operators';
+import { debounceTime, takeUntil } from 'rxjs/operators';
+import { BaseComponent } from 'src/app/shared/base.class';
 import { AuthService } from '../../core/auth.service';
 import { Job, ColorType, JobType } from '../../shared/job.interface';
 import { TIGUAN_PURCHASE_DATE } from '../layout.component';
@@ -30,7 +31,7 @@ export interface JobGraphDetails extends Job {
     templateUrl: './progress-bar.component.html',
     styleUrls: ['./progress-bar.component.scss']
 })
-export class ProgressBarComponent implements OnInit {
+export class ProgressBarComponent extends BaseComponent implements OnInit {
     isAdmin$: Observable<boolean> = this.authService.isAdmin$;
 
     jobGraphItems: JobGraphItem[] = [];
@@ -146,11 +147,14 @@ export class ProgressBarComponent implements OnInit {
     constructor(
         private element: ElementRef<HTMLElement>,
         private authService: AuthService
-    ) {}
+    ) {
+        super();
+    }
 
     ngOnInit(): void {
         this.currentValueCtrl.valueChanges.pipe(
-            debounceTime(1000)
+            debounceTime(1000),
+            takeUntil(this.destroy$)
         )
         .subscribe(() => this.scrollToCurrent());
 
