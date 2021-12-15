@@ -4,7 +4,7 @@ import { MatCheckboxChange } from '@angular/material/checkbox';
 import { IFormControl } from '@rxweb/types';
 import { Observable } from 'rxjs';
 import { debounceTime } from 'rxjs/operators';
-import { AuthService } from 'src/app/core/auth.service';
+import { AuthService } from '../../core/auth.service';
 import { Job, ColorType, JobType } from '../../shared/job.interface';
 import { TIGUAN_PURCHASE_DATE } from '../layout.component';
 

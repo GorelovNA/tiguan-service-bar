@@ -1,13 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter } from 'rxjs/operators';
+import { filter, skip } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '../core/auth.service';
 import { Job } from '../shared/job.interface';
 import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
 import { JobGraphDetails } from './progress-bar/progress-bar.component';
-import { LayoutService } from './layout.service';
-import { threadId } from 'worker_threads';
+import { JobsService } from '../core/jobs.service';
 
 export const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
 
@@ -17,18 +16,18 @@ export const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
     styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent implements OnInit {
-    allJobs$: Observable<Job[]> = this.layoutService.jobsSubject$.asObservable().pipe(
+    allJobs$: Observable<Job[]> = this.jobsService.jobsSubject$.asObservable().pipe(
         filter((jobs): jobs is Job[] => !!jobs),
     );
-    kmJobs$: Observable<Job[]> = this.layoutService.kmJobs$;
-    timeJobs$: Observable<Job[]> = this.layoutService.timeJobs$;
+    kmJobs$: Observable<Job[]> = this.jobsService.kmJobs$;
+    timeJobs$: Observable<Job[]> = this.jobsService.timeJobs$;
 
     user$ = this.authService.userRole$;
 
     isAdmin$: Observable<boolean> = this.authService.isAdmin$;
 
     get jobList(): Job[] {
-        return this.layoutService.jobsSubject$.value || [];
+        return this.jobsService.jobsSubject$.value || [];
     }
 
     readonly possTime: number = // время владения
@@ -36,19 +35,20 @@ export class LayoutComponent implements OnInit {
 
     constructor(
         private dialog: MatDialog,
-        private layoutService: LayoutService,
+        private jobsService: JobsService,
         private authService: AuthService,
     ) { }
 
     ngOnInit(): void {
-        this.layoutService.getList().subscribe(res => {
-            this.layoutService.jobsSubject$.next(res);
+        this.jobsService.getList().subscribe(res => {
+            this.jobsService.jobsSubject$.next(res);
         });
 
-        this.layoutService.jobsSubject$.subscribe(res => {
-            if (res) {
-                this.saveJobsToLS(res);
-            }
+        this.jobsService.jobsSubject$.pipe(
+            filter((jobs): jobs is Job[] => !!jobs),
+            skip(1)
+        ).subscribe(res => {
+            this.saveJobs(res);
         });
     }
 
@@ -61,7 +61,7 @@ export class LayoutComponent implements OnInit {
     }
 
     onDelete(id: string): void {
-        this.layoutService.jobsSubject$.next(this.jobList.filter(j => j.id !== id));
+        this.jobsService.jobsSubject$.next(this.jobList.filter(j => j.id !== id));
     }
 
     onJobCompliteChanged(event: { job: JobGraphDetails, checked: boolean }): void {
@@ -72,7 +72,7 @@ export class LayoutComponent implements OnInit {
             existedJob!.complitedJobs.push({ value: event.job.value });
         }
 
-        this.saveJobsToLS(this.jobList);
+        this.saveJobs(this.jobList);
     }
 
     logout(): void {
@@ -94,9 +94,9 @@ export class LayoutComponent implements OnInit {
                 if (currJobIndex !== -1) {
                     const arr = [...this.jobList] ;
                     arr.splice(currJobIndex, 1, result);
-                    this.layoutService.jobsSubject$.next(arr);
+                    this.jobsService.jobsSubject$.next(arr);
                 } else {
-                    this.layoutService.jobsSubject$.next([
+                    this.jobsService.jobsSubject$.next([
                         ...this.jobList,
                         result
                     ]);
@@ -112,7 +112,7 @@ export class LayoutComponent implements OnInit {
         return months <= 0 ? 0 : months;
     }
 
-    private saveJobsToLS(jobs: Job[]): void {
-        localStorage.setItem('jobs', JSON.stringify(jobs));
+    private saveJobs(jobs: Job[]): void {
+        this.jobsService.updateList(jobs).subscribe();
     }
 }
