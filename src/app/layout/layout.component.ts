@@ -6,15 +6,16 @@ import { AuthService } from '../core/auth.service';
 import { Job } from '../shared/job.interface';
 import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
 import { JobGraphDetails } from './progress-bar/progress-bar.component';
-import { JobsService } from '../core/jobs.service';
+import { JobsService } from './jobs.service';
 import { BaseComponent } from '../shared/base.class';
 
-export const TIGUAN_PURCHASE_DATE: Date = new Date('04-01-2021'); // 1 Apr 21
+export const TIGUAN_PURCHASE_DATE: Date = new Date(2021, 3, 1); // 1 Apr 21
 
 @Component({
     selector: 'app-layout',
     templateUrl: './layout.component.html',
-    styleUrls: ['./layout.component.scss']
+    styleUrls: ['./layout.component.scss'],
+    providers: [JobsService]
 })
 export class LayoutComponent extends BaseComponent implements OnInit {
     allJobs$: Observable<Job[]> = this.jobsService.jobsSubject$.asObservable().pipe(
