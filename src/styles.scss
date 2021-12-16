@@ -1,4 +1,4 @@
-/* You can add global styles to this file, and also import other style files */
+@import "src/app/shared/index";
 
 body {
     font-family: Roboto, "Helvetica Neue", sans-serif;
@@ -12,10 +12,32 @@ body {
     opacity: 1 !important;
 }
 
+.tooltip {
+    @include media-breakpoint-down(md) {
+        position: fixed !important;
+        top: 50% !important;
+        left: 0px !important;
+        transform: translate(0, -50%) !important;
+        width: 100% !important;
+
+        .arrow {
+            display: none;
+        }
+
+        .preview {
+            overflow-x: auto;
+
+            .mat-table {
+                width: 100%;
+            }
+        }
+    }
+}
+
 .tooltip-inner {
     max-width: none !important;
 
-    table {
+    .mat-table {
         min-width: 350px;
 
         .mat-cell, .mat-header-cell {

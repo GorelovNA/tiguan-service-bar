@@ -3,11 +3,12 @@ import { FormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { IFormControl } from '@rxweb/types';
 import { Observable } from 'rxjs';
-import { debounceTime, takeUntil } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/shared/base.class';
 import { AuthService } from '../../core/auth.service';
 import { Job, ColorType, JobType } from '../../shared/job.interface';
 import { TIGUAN_PURCHASE_DATE } from '../layout.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
 
 
 export const MAX_KM_SIZE = 300; // т.км
@@ -43,6 +44,9 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
     scaleSteps: { value: number; text: string | Date }[] = [];
 
     currentValueCtrl: IFormControl<number> = new FormControl(0);
+
+    sliderMaxValue: number = this.isKmType ? 100 : 48;
+    sliderMinValue: number = this.isKmType ? 30 : 18;
 
     get isKmType(): boolean {
         return this.jobType === JobType.Km;
@@ -146,7 +150,8 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
 
     constructor(
         private element: ElementRef<HTMLElement>,
-        private authService: AuthService
+        private authService: AuthService,
+        private breakpointObserver: BreakpointObserver,
     ) {
         super();
     }
@@ -159,6 +164,25 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
         .subscribe(() => this.scrollToCurrent());
 
         this.graphScale = this.isKmType ? 40 : 36;
+        this.sliderMaxValue = this.isKmType ? 100 : 48;
+        this.sliderMinValue = this.isKmType ? 30 : 18;
+
+        this.breakpointObserver.observe('(max-width: 899.98px)').pipe(
+            map(({ matches }) => matches),
+            distinctUntilChanged(),
+            takeUntil(this.destroy$)
+        )
+        .subscribe(isMobile => {
+            if (isMobile) {
+                this.graphScale = this.isKmType ? 15 : 18;
+                this.sliderMaxValue = this.isKmType ? 30 : 36;
+                this.sliderMinValue = this.isKmType ? 10 : 12;
+            } else {
+                this.graphScale = this.isKmType ? 40 : 36;
+                this.sliderMaxValue = this.isKmType ? 100 : 48;
+                this.sliderMinValue = this.isKmType ? 30 : 18;
+            }
+        });
 
         const step = this.isKmType ? 5 : 2; // т.км / мес
         let value = step;
@@ -170,7 +194,7 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
             value += step;
         }
 
-        this.scrollToCurrent();
+        // this.scrollToCurrent();
     }
 
     getItemMargin(value: number): number {
@@ -178,10 +202,10 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
     }
 
     scrollToCurrent(additionalScrollValue?: number): void {
+        console.log('here');
 
         this.element.nativeElement.querySelector('#car')?.scrollIntoView();
 
-        console.log(this.element.nativeElement.querySelector('#scrollBlock'));
         if (additionalScrollValue) {
             this.element.nativeElement.querySelector('#scrollBlock');
         }

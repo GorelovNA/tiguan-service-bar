@@ -1,20 +1,8 @@
-
 <div class="user-info">
     Роль: {{ user$ | async }}
     <button mat-raised-button color="primary" (click)="logout()">Logout</button>
 </div>
 <hr>
-
-<app-job-list
-    *ngIf="jobList?.length"
-    [jobs]="allJobs$ | async"
-    (edited)="onEdit($event)"
-    (deleted)="onDelete($event)"
-></app-job-list>
-
-<button mat-raised-button color="primary" (click)="add()" [disabled]="!(isAdmin$ | async)">Add job</button>
-
-<br><br><br>
 
 <ng-container *ngIf="(kmJobs$ | async) as kmJobs">
     <app-progress-bar *ngIf="kmJobs.length" [jobs]="kmJobs" [currentValue]="15.5" (jobCompliteChanged)="onJobCompliteChanged($event)"></app-progress-bar>
@@ -24,3 +12,19 @@
     <app-progress-bar *ngIf="timeJobs.length" [jobs]="timeJobs" [currentValue]="possTime" (jobCompliteChanged)="onJobCompliteChanged($event)"></app-progress-bar>
 </ng-container>
 
+<br>
+<hr>
+<br>
+
+<h2>Service jobs list</h2>
+<button mat-raised-button color="primary" (click)="add()" [disabled]="!(isAdmin$ | async)">Add job</button>
+
+<br>
+<br>
+
+<app-job-list
+    *ngIf="jobList?.length"
+    [jobs]="allJobs$ | async"
+    (edited)="onEdit($event)"
+    (deleted)="onDelete($event)"
+></app-job-list>
