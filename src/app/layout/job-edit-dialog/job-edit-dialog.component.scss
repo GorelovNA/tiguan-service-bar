@@ -10,3 +10,13 @@ form {
     display: flex;
     flex-direction: column;
 }
+
+
+.optional-jobs-container {
+    display: flex;
+    flex-direction: column;
+
+    mat-icon {
+        cursor: pointer;
+    }
+}

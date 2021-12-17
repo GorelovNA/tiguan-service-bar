@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { filter, skip, takeUntil } from 'rxjs/operators';
+import { filter, finalize, skip, takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '../core/auth.service';
 import { Job } from '../shared/job.interface';
@@ -28,6 +28,10 @@ export class LayoutComponent extends BaseComponent implements OnInit {
 
     isAdmin$: Observable<boolean> = this.authService.isAdmin$;
 
+    currentKmValue = String(localStorage.getItem('currentKmValue') || '0');
+
+    isLoading = true;
+
     get jobList(): Job[] {
         return this.jobsService.jobsSubject$.value || [];
     }
@@ -44,7 +48,10 @@ export class LayoutComponent extends BaseComponent implements OnInit {
      }
 
     ngOnInit(): void {
-        this.jobsService.getList().pipe(takeUntil(this.destroy$)).subscribe(res => {
+        this.jobsService.getList().pipe(
+            finalize(() => this.isLoading = false),
+            takeUntil(this.destroy$)
+        ).subscribe(res => {
             this.jobsService.jobsSubject$.next(res);
         });
 

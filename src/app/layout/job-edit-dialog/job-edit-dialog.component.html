@@ -21,10 +21,55 @@
             <mat-label>Plan value, {{ type === jobType.Time ? 'мес' : 'т.км' }}</mat-label>
             <input matInput type="number" formControlName="planValue">
         </mat-form-field>
-        <mat-form-field appearance="fill">
-            <mat-label>(Optional) Delay value, {{ type === jobType.Time ? 'мес' : 'т.км' }}</mat-label>
-            <input matInput type="number" formControlName="delayValue">
-        </mat-form-field>
+
+        <mat-accordion class="form-field">
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Optional jobs
+                    </mat-panel-title>
+                    <mat-panel-description>
+                        Запланировать работу вне плана
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div formArrayName="optionalJobsOn">
+                    <mat-form-field class="optional-jobs-container" appearance="outline"
+                        *ngFor="let jobCtrl of optionalJobsFormArray.controls; index as i">
+                        <input matInput type="number" [formControl]="jobCtrl"
+                            [placeholder]="type === jobType.Time ? 'мес' : 'т.км'">
+                        <mat-icon matSuffix color="warn" (click)="optionalJobsFormArray.removeAt(i)">delete</mat-icon>
+                    </mat-form-field>
+                    <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon"
+                        (click)="addNewOptionalJob()">
+                        <mat-icon>plus_one</mat-icon>
+                    </button>
+                </div>
+            </mat-expansion-panel>
+
+
+            <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                    <mat-panel-title>
+                        Skipped jobs
+                    </mat-panel-title>
+                    <mat-panel-description>
+                       Пропустить работы (убрать с графа)
+                    </mat-panel-description>
+                </mat-expansion-panel-header>
+                <div formArrayName="skippedJobsOn">
+                    <mat-form-field class="optional-jobs-container" appearance="outline"
+                        *ngFor="let jobCtrl of skippedJobsFormArray.controls; index as i">
+                        <input matInput type="number" [formControl]="jobCtrl"
+                            [placeholder]="type === jobType.Time ? 'мес' : 'т.км'">
+                        <mat-icon matSuffix color="warn" (click)="skippedJobsFormArray.removeAt(i)">delete</mat-icon>
+                    </mat-form-field>
+                    <button mat-mini-fab color="accent" aria-label="Example icon button with a plus one icon"
+                        (click)="addNewSkippedJob()">
+                        <mat-icon>plus_one</mat-icon>
+                    </button>
+                </div>
+            </mat-expansion-panel>
+        </mat-accordion>
 
         <mat-form-field appearance="fill">
             <mat-label>(Optional) Description</mat-label>

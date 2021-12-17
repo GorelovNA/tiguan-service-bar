@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
 import { Observable } from 'rxjs';
@@ -11,7 +11,7 @@ import { Job, JobType, ColorType } from '../../shared/job.interface';
     styleUrls: ['./job-list.component.scss']
 })
 // @ts-ignore
-export class JobListComponent implements OnInit {
+export class JobListComponent implements OnInit, AfterViewInit {
     @Input() set jobs(res: Job[]) {
         this.timeJobs = new MatTableDataSource(res.filter(r => r.type === JobType.Time));
         this.kmJobs = new MatTableDataSource(res.filter(r => r.type === JobType.Km));
@@ -35,7 +35,7 @@ export class JobListComponent implements OnInit {
     kmJobs: MatTableDataSource<Job>;
 
 
-    displayedColumns: string[] = ['title', 'colorType', 'planValue', 'delayValue', 'description', 'createDate', 'id'];
+    displayedColumns: string[] = ['title', 'colorType', 'planValue', 'optionalJobsOn', 'skippedJobsOn', 'description', 'createDate', 'id'];
 
     colorType = ColorType;
 
@@ -47,7 +47,7 @@ export class JobListComponent implements OnInit {
 
     constructor(private authService: AuthService) { }
 
-    ngAfterViewInit() {
+    ngAfterViewInit(): void {
       this.kmJobs.sort = this.sort1;
       this.timeJobs.sort = this.sort2;
     }

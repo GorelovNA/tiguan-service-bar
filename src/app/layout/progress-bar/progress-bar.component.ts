@@ -78,7 +78,7 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
 
         _jobs.forEach(j => {
             if (j.justOnce) {
-                const value = j.delayValue || j.planValue;
+                const value = j.planValue;
                 const sameValueItem = this.jobGraphItems.find(i => i.value === value);
 
                 if (sameValueItem) {
@@ -109,37 +109,46 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
                 }
             } else {
                 const planValue = j.planValue;
-                let value = j.delayValue || planValue;
+                let value = planValue;
+                let prevValue = 0;
                 while (value <= this.MAX_VALUE) {
-                    const sameValueItem = this.jobGraphItems.find(i => i.value === value);
-
-                    if (sameValueItem) {
-                        sameValueItem.jobs.push({
-                            ...j,
-                            value,
-                            jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
-                        });
-                        sameValueItem.icon = this.getJobIcon(sameValueItem);
-                        sameValueItem.complited = sameValueItem.jobs.every(j => j.jobComplited);
-                    } else {
-                        const job: JobGraphDetails = {
-                            ...j,
-                            value,
-                            jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
-                        };
-
-                        const item: JobGraphItem = {
-                            value,
-                            jobs: [job],
-                            icon: '',
-                            complited: job.jobComplited
-                        };
-                        this.jobGraphItems.push({
-                            ...item,
-                            icon: this.getJobIcon(item)
-                        });
+                    const optionalJob = j.optionalJobsOn.find(oj => oj < value && oj > prevValue);
+                    if (optionalJob) {
+                        value = optionalJob;
                     }
 
+                    if (!j.skippedJobsOn.includes(value)) {
+                        const sameValueItem = this.jobGraphItems.find(i => i.value === value);
+
+                        if (sameValueItem) {
+                            sameValueItem.jobs.push({
+                                ...j,
+                                value,
+                                jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
+                            });
+                            sameValueItem.icon = this.getJobIcon(sameValueItem);
+                            sameValueItem.complited = sameValueItem.jobs.every(j => j.jobComplited);
+                        } else {
+                            const job: JobGraphDetails = {
+                                ...j,
+                                value,
+                                jobComplited: j.complitedJobs?.some(jb => jb.value === value) || false
+                            };
+
+                            const item: JobGraphItem = {
+                                value,
+                                jobs: [job],
+                                icon: '',
+                                complited: job.jobComplited
+                            };
+                            this.jobGraphItems.push({
+                                ...item,
+                                icon: this.getJobIcon(item)
+                            });
+                        }
+                    }
+
+                    prevValue = value;
                     value += planValue;
                 }
             }
@@ -161,7 +170,12 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
             debounceTime(1000),
             takeUntil(this.destroy$)
         )
-        .subscribe(() => this.scrollToCurrent());
+        .subscribe(v => {
+            if (this.isKmType) {
+                localStorage.setItem('currentKmValue', String(v));
+            }
+            this.scrollToCurrent();
+        });
 
         this.graphScale = this.isKmType ? 40 : 36;
         this.sliderMaxValue = this.isKmType ? 100 : 48;

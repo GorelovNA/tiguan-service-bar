@@ -4,7 +4,8 @@ export interface Job {
     type: JobType;
     colorType: ColorType;
     planValue: number;
-    delayValue?: number;
+    optionalJobsOn: number[]; // exp: [11, 16]; внеплановые работы, влияют на дальнейшие плановые работы
+    skippedJobsOn: number[];  // exp: [10]; пропустить работы (не будет отобращаться на графе)
     description?: string;
     justOnce?: boolean;
     createDate?: Date;
