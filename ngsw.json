@@ -1,0 +1,93 @@
+{
+  "configVersion": 1,
+  "timestamp": 1639860989166,
+  "index": "https://gorelovna.github.io/tiguan-service-bar/index.html",
+  "assetGroups": [
+    {
+      "name": "app",
+      "installMode": "prefetch",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://gorelovna.github.io/tiguan-service-bar/1.d037c7ff72a9d68abde2.js",
+        "https://gorelovna.github.io/tiguan-service-bar/5.bdb39a6e00b8ee21cf7c.js",
+        "https://gorelovna.github.io/tiguan-service-bar/6.5bcb9b18551a6c8b08de.js",
+        "https://gorelovna.github.io/tiguan-service-bar/favicon.ico",
+        "https://gorelovna.github.io/tiguan-service-bar/index.html",
+        "https://gorelovna.github.io/tiguan-service-bar/main.12c00f0d14739ca1ce0f.js",
+        "https://gorelovna.github.io/tiguan-service-bar/manifest.webmanifest",
+        "https://gorelovna.github.io/tiguan-service-bar/polyfills.297e52098208f3025ef2.js",
+        "https://gorelovna.github.io/tiguan-service-bar/runtime.28866afa3124b51a4cc8.js",
+        "https://gorelovna.github.io/tiguan-service-bar/styles.796a10bfa093d894109b.css"
+      ],
+      "patterns": []
+    },
+    {
+      "name": "assets",
+      "installMode": "lazy",
+      "updateMode": "prefetch",
+      "cacheQueryOptions": {
+        "ignoreVary": true
+      },
+      "urls": [
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-128x128.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-144x144.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-152x152.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-192x192.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-256x256.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-384x384.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-512x512.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-72x72.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-96x96.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/images/tiguan.png",
+        "https://gorelovna.github.io/tiguan-service-bar/assets/json/base.json"
+      ],
+      "patterns": []
+    }
+  ],
+  "dataGroups": [],
+  "hashTable": {
+    "https://gorelovna.github.io/tiguan-service-bar/1.d037c7ff72a9d68abde2.js": "5db31be6ce5a6c68bc6ff7ed5c78cb4bbf19f447",
+    "https://gorelovna.github.io/tiguan-service-bar/5.bdb39a6e00b8ee21cf7c.js": "dd8c03aa258e096c9aea7717298224c01311d589",
+    "https://gorelovna.github.io/tiguan-service-bar/6.5bcb9b18551a6c8b08de.js": "314c1cb80c05203fcfd0737c09b4c95d3bb97dc5",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-128x128.png": "2c64a52f1ec1335787cd13049d6ee49224df4f45",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-144x144.png": "e9774605c03e93eed2e2af71aeb660b23d7e024f",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-152x152.png": "9dcd59b55c87db4a601ce1271bf969f6411fed9b",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-192x192.png": "44aa1d3f29ff46164344d1caa1166fd8d6495c30",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-256x256.png": "a7affdc8f95a3e8ade5361a64b490e120fe1504b",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-384x384.png": "b1e91cecba92744c4b637d4aa07bebebec922243",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-512x512.png": "636b0355d9a03704e6127f50b6f11df5aca8c0ad",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-72x72.png": "0d6387fdf51818e2f4dd39e120d0226677d5eede",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/icons/icon-96x96.png": "f06bac37da10a434d18b6d1754cfd5e87bb7f0fb",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/images/tiguan.png": "07c60d3df8307bc758e5e15f7a872c9b68ed03f5",
+    "https://gorelovna.github.io/tiguan-service-bar/assets/json/base.json": "16374e109ae2c239406291aacd223b37ead030ac",
+    "https://gorelovna.github.io/tiguan-service-bar/favicon.ico": "4c349fbf85e1d3f6d98326fac8bf4ea8332c9a5f",
+    "https://gorelovna.github.io/tiguan-service-bar/index.html": "c595132865ca7dff1f630368058a9c97e54e6577",
+    "https://gorelovna.github.io/tiguan-service-bar/main.12c00f0d14739ca1ce0f.js": "dba1eb15ff606114d803e4947ddfbe575b6e2d05",
+    "https://gorelovna.github.io/tiguan-service-bar/manifest.webmanifest": "09fcc31beda8d824ebcc853a71e6d7b8e4933952",
+    "https://gorelovna.github.io/tiguan-service-bar/polyfills.297e52098208f3025ef2.js": "4583ea4040212bd032bc39cd5d24dccc13518d85",
+    "https://gorelovna.github.io/tiguan-service-bar/runtime.28866afa3124b51a4cc8.js": "c5879c0d85f86f602abfac9d82186284c47f521d",
+    "https://gorelovna.github.io/tiguan-service-bar/styles.796a10bfa093d894109b.css": "4e22eca377f5032a4223bd392719dfcb06836793"
+  },
+  "navigationUrls": [
+    {
+      "positive": true,
+      "regex": "^\\/.*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*\\.[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*$"
+    },
+    {
+      "positive": false,
+      "regex": "^\\/(?:.+\\/)?[^/]*__[^/]*\\/.*$"
+    }
+  ],
+  "navigationRequestStrategy": "performance"
+}
