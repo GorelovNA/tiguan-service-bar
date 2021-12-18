@@ -40,6 +40,7 @@ export class JobEditDialogComponent {
             colorType: [data?.colorType || ColorType.Zamena, Validators.required],
             planValue: [data?.planValue || null, Validators.required],
             description: [data?.description || ''],
+            cost: [data?.cost || null],
             optionalJobsOn: this.buildFormArray(data?.optionalJobsOn || []),
             skippedJobsOn: this.buildFormArray(data?.skippedJobsOn || []),
             justOnce: [data?.justOnce || false],
