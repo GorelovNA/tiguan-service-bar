@@ -6,6 +6,7 @@ export interface Job {
     planValue: number;
     optionalJobsOn: number[]; // exp: [11, 16]; внеплановые работы, влияют на дальнейшие плановые работы
     skippedJobsOn: number[];  // exp: [10]; пропустить работы (не будет отобращаться на графе)
+    cost: number; // job cost, RUB
     description?: string;
     justOnce?: boolean;
     createDate?: Date;

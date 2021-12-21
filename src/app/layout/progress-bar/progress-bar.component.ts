@@ -19,6 +19,7 @@ interface JobGraphItem {
     jobs: JobGraphDetails[]; // работы на данном пробеге / времени
     icon: string;
     complited: boolean;
+    fullCost: number; // общая стоимость работ
 }
 
 
@@ -89,6 +90,7 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
                     });
                     sameValueItem.icon = this.getJobIcon(sameValueItem);
                     sameValueItem.complited = sameValueItem.jobs.every(j => j.jobComplited);
+                    sameValueItem.fullCost = sameValueItem.jobs.reduce((sum, curr) => sum += curr.cost || 0, 0);
                 } else {
                     const job: JobGraphDetails = {
                         ...j,
@@ -100,7 +102,8 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
                         value,
                         jobs: [job],
                         icon: '',
-                        complited: job.jobComplited
+                        complited: job.jobComplited,
+                        fullCost: job.cost
                     };
                     this.jobGraphItems.push({
                         ...item,
@@ -128,6 +131,7 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
                             });
                             sameValueItem.icon = this.getJobIcon(sameValueItem);
                             sameValueItem.complited = sameValueItem.jobs.every(j => j.jobComplited);
+                            sameValueItem.fullCost = sameValueItem.jobs.reduce((sum, curr) => sum += curr.cost || 0, 0);
                         } else {
                             const job: JobGraphDetails = {
                                 ...j,
@@ -139,7 +143,8 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
                                 value,
                                 jobs: [job],
                                 icon: '',
-                                complited: job.jobComplited
+                                complited: job.jobComplited,
+                                fullCost: job.cost
                             };
                             this.jobGraphItems.push({
                                 ...item,

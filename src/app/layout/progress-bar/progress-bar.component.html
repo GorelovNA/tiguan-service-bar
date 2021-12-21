@@ -42,6 +42,7 @@
                 <div class="preview">
                     <h2>Работы на пробеге: {{ item.value }} {{isKmType ? 'т.км' : 'мес'}}</h2>
                     <h3 *ngIf="!isKmType">{{ getDateByValue(item.value) | date:'MMM y' }}</h3>
+                    <h4 *ngIf="item.fullCost">Общая стоимость: {{ item.fullCost }} ₽</h4>
                     <table mat-table [dataSource]="item.jobs">
                         <ng-container matColumnDef="title">
                         <th mat-header-cell *matHeaderCellDef> Название </th>
@@ -55,13 +56,17 @@
                         <th mat-header-cell *matHeaderCellDef> Комментарий </th>
                         <td mat-cell *matCellDef="let element" class="description-cell"> {{element.description}} </td>
                         </ng-container>
+                        <ng-container matColumnDef="cost">
+                        <th mat-header-cell *matHeaderCellDef> Стоимость, ₽ </th>
+                        <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
+                        </ng-container>
                         <ng-container matColumnDef="complited">
                         <th mat-header-cell *matHeaderCellDef> Работы выполнены </th>
-                        <td mat-cell *matCellDef="let element" class="description-cell"><mat-checkbox [checked]="element.jobComplited" (change)="onCompliteChanged(item, element, $event)" [disabled]="!(isAdmin$ | async)"></mat-checkbox></td>
+                        <td mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.jobComplited" (change)="onCompliteChanged(item, element, $event)" [disabled]="!(isAdmin$ | async)"></mat-checkbox></td>
                         </ng-container>
 
-                        <tr mat-header-row *matHeaderRowDef="[ 'title', 'colorType', 'description', 'complited' ]"></tr>
-                        <tr mat-row *matRowDef="let row; columns: [ 'title', 'colorType', 'description', 'complited' ];"></tr>
+                        <tr mat-header-row *matHeaderRowDef="[ 'title', 'colorType', 'description', 'cost', 'complited' ]"></tr>
+                        <tr mat-row *matRowDef="let row; columns: [ 'title', 'colorType', 'description', 'cost', 'complited' ];"></tr>
                     </table>
                 </div>
             </ng-template>
