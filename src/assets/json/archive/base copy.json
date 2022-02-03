@@ -4,26 +4,26 @@
         "title": "Замена масла в двигателе",
         "type": 1,
         "colorType": 1,
-        "planValue": 6,
-        "description": "Масло (Mobil1 0w20) 5,7л\nФильтр масляный\nПробка с уплот. кольцом масляного поддона ",
-        "cost": 10500,
-        "optionalJobsOn": [
-            3
-        ],
+        "planValue": 7,
+        "optionalJobsOn": [],
         "skippedJobsOn": [],
+        "description": "Масло (Mobil1 0w20) 5,7л\nФильтр масляный\nПробка с уплот. кольцом масляного поддона ",
         "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 3
-            },
-            {
-                "value": 9
-            },
-            {
-                "value": 15
-            }
-        ],
-        "createDate": "2021-12-21T15:33:50.429Z"
+        "createDate": "2021-12-06T15:40:58.273Z",
+        "complitedJobs": []
+    },
+    {
+        "id": "c3fadb5d-19fb-4edf-8384-4acdcc552849",
+        "title": "ТО 0",
+        "type": 1,
+        "colorType": 1,
+        "planValue": 3,
+        "optionalJobsOn": [],
+        "skippedJobsOn": [],
+        "description": "Замена масла в двигателе (Mobil1 0w40)\nФильтр маслянный\nПробка с уплот. кольцом масляного поддона",
+        "justOnce": true,
+        "createDate": "2021-12-06T15:42:26.056Z",
+        "complitedJobs": []
     },
     {
         "id": "7f8eb865-1510-46ad-a41c-ad0e4840e1df",
@@ -31,31 +31,25 @@
         "type": 1,
         "colorType": 1,
         "planValue": 15,
-        "description": "Раз в ТО.\nИнспекционная диагностика на дилере",
-        "cost": 2300,
         "optionalJobsOn": [],
         "skippedJobsOn": [],
+        "description": "Раз в ТО.\nИнспекционная диагностика на дилере",
         "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 15
-            }
-        ],
-        "createDate": "2021-12-21T15:35:02.220Z"
+        "createDate": "2021-12-06T15:55:12.425Z",
+        "complitedJobs": []
     },
     {
         "id": "e7932cae-16f0-4e8e-9d9b-67e17c65d829",
         "title": "Промывка масляной системы",
         "type": 1,
-        "colorType": 1,
+        "colorType": 0,
         "planValue": 37.5,
-        "description": "LIQUI MOLY 7592 Oilsystem Spulung High Performance Benzin",
-        "cost": 1800,
         "optionalJobsOn": [],
         "skippedJobsOn": [],
+        "description": "LIQUI MOLY 7592 Oilsystem Spulung High Performance Benzin",
         "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-21T15:38:09.481Z"
+        "createDate": "2021-12-06T17:21:54.677Z",
+        "complitedJobs": []
     },
     {
         "id": "10f0e7b1-0270-4d3c-8c89-d782460f9831",
@@ -63,13 +57,12 @@
         "type": 0,
         "colorType": 1,
         "planValue": 12,
-        "description": "Оригинал или Mann(сложно проверить на подлинность)",
-        "cost": null,
         "optionalJobsOn": [],
         "skippedJobsOn": [],
+        "description": "Оригинал или Mann(сложно проверить на подлинность)",
         "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-18T21:20:49.086Z"
+        "createDate": "2021-12-06T17:09:53.176Z",
+        "complitedJobs": []
     },
     {
         "id": "7511c66d-7a31-4087-9ced-8439bde68975",
@@ -90,22 +83,12 @@
         "type": 1,
         "colorType": 1,
         "planValue": 10,
-        "description": "P1101 PRO-TEC Очиститель топливной системы / Fuel Line Cleaner\n* заказывал у VAG Center спб",
-        "cost": 1000,
-        "optionalJobsOn": [
-            9
-        ],
+        "optionalJobsOn": [9],
         "skippedJobsOn": [],
+        "description": "P1101 PRO-TEC Очиститель топливной системы / Fuel Line Cleaner",
         "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 19
-            },
-            {
-                "value": 9
-            }
-        ],
-        "createDate": "2021-12-21T15:40:12.108Z"
+        "complitedJobs": [],
+        "createDate": "2021-12-07T11:20:27.757Z"
     },
     {
         "id": "3826c77e-297e-4466-82b1-7ae074a00531",
@@ -113,13 +96,12 @@
         "type": 1,
         "colorType": 1,
         "planValue": 30,
-        "description": "Оригинал",
-        "cost": 7073,
         "optionalJobsOn": [],
         "skippedJobsOn": [],
+        "description": "Оригинал",
         "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-21T15:43:47.474Z"
+        "createDate": "2021-12-06T17:21:22.663Z",
+        "complitedJobs": []
     },
     {
         "id": "63d2e3d3-5f3b-4c52-a60c-1690b0edbe8f",
@@ -162,21 +144,16 @@
     },
     {
         "id": "d89f969e-6da7-45c7-9d79-a7128dd43238",
-        "title": "Замена антифриза",
+        "title": "Антифриз",
         "type": 0,
         "colorType": 1,
         "planValue": 24,
-        "description": "VW G12 EVO (с осени 2020)\n***..A2 - готовая смесь\n***..М2 - концентрат (разбавляется дистилированной водой)",
-        "cost": null,
-        "optionalJobsOn": [
-            36
-        ],
-        "skippedJobsOn": [
-            24
-        ],
+        "optionalJobsOn": [36],
+        "skippedJobsOn": [24],
+        "description": "VW G12 EVO",
         "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2022-02-03T11:26:58.504Z"
+        "createDate": "2021-12-06T17:47:11.202Z",
+        "complitedJobs": []
     },
     {
         "id": "d0eb7c37-959e-4687-acd8-732bf33572eb",
@@ -197,13 +174,12 @@
         "type": 1,
         "colorType": 1,
         "planValue": 60,
-        "description": "Только оригинал",
-        "cost": 16477,
         "optionalJobsOn": [],
         "skippedJobsOn": [],
+        "description": "Только оригинал",
         "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-21T15:46:39.059Z"
+        "createDate": "2021-12-07T06:57:43.525Z",
+        "complitedJobs": []
     },
     {
         "id": "5f0e4616-13c4-4340-9906-231bbf21b28f",
@@ -222,20 +198,13 @@
         "id": "c2ad70a7-242b-4a9e-994f-eb514b35ebec",
         "title": "Антифрикционная присадка",
         "type": 1,
-        "colorType": 1,
+        "colorType": 0,
         "planValue": 30,
-        "description": "В масляную систему\nLIQUI MOLY Cera Tec",
-        "cost": 1609,
-        "optionalJobsOn": [
-            9
-        ],
+        "optionalJobsOn": [9],
         "skippedJobsOn": [],
+        "description": "В масляную систему\nLIQUI MOLY Cera Tec",
         "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 9
-            }
-        ],
-        "createDate": "2021-12-21T15:51:11.672Z"
+        "createDate": "2021-12-07T09:16:49.578Z",
+        "complitedJobs": []
     }
 ]
