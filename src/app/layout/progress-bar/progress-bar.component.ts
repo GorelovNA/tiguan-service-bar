@@ -26,6 +26,8 @@ interface JobGraphItem {
 export interface JobGraphDetails extends Job {
     value: number; // итоговый пробег / время
     jobComplited: boolean;
+    jobComplitedDate?: Date; // дата выполненной работы
+    jobComplitedCost?: number; // RUB
 }
 
 @Component({

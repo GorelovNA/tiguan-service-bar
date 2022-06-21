@@ -6,7 +6,7 @@
         "colorType": 1,
         "planValue": 6,
         "description": "Масло (Mobil1 0w20) 5,7л\nФильтр масляный\nПробка с уплот. кольцом масляного поддона ",
-        "cost": 10500,
+        "cost": 10600,
         "optionalJobsOn": [
             3
         ],
@@ -14,16 +14,22 @@
         "justOnce": false,
         "complitedJobs": [
             {
-                "value": 3
+                "value": 21
+            },
+            {
+                "value": 15
             },
             {
                 "value": 9
             },
             {
-                "value": 15
+                "value": 3
+            },
+            {
+                "value": 27
             }
         ],
-        "createDate": "2021-12-21T15:33:50.429Z"
+        "createDate": "2022-02-10T16:02:36.012Z"
     },
     {
         "id": "7f8eb865-1510-46ad-a41c-ad0e4840e1df",
@@ -64,12 +70,16 @@
         "colorType": 1,
         "planValue": 12,
         "description": "Оригинал или Mann(сложно проверить на подлинность)",
-        "cost": null,
+        "cost": 3000,
         "optionalJobsOn": [],
         "skippedJobsOn": [],
         "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-18T21:20:49.086Z"
+        "complitedJobs": [
+            {
+                "value": 12
+            }
+        ],
+        "createDate": "2022-04-02T06:25:30.384Z"
     },
     {
         "id": "7511c66d-7a31-4087-9ced-8439bde68975",
@@ -77,18 +87,23 @@
         "type": 0,
         "colorType": 1,
         "planValue": 12,
+        "description": "Оригинал. Гипоалергенный а не угольный",
+        "cost": 2770,
         "optionalJobsOn": [],
         "skippedJobsOn": [],
-        "description": "Оригинал. Гипоалергенный а не угольный",
         "justOnce": false,
-        "createDate": "2021-12-06T17:10:35.093Z",
-        "complitedJobs": []
+        "complitedJobs": [
+            {
+                "value": 12
+            }
+        ],
+        "createDate": "2022-04-02T06:26:28.710Z"
     },
     {
         "id": "6f9c331a-387a-48a9-9aa6-73660e34dc0b",
         "title": "Присадка в топливную систему",
         "type": 1,
-        "colorType": 1,
+        "colorType": 0,
         "planValue": 10,
         "description": "P1101 PRO-TEC Очиститель топливной системы / Fuel Line Cleaner\n* заказывал у VAG Center спб",
         "cost": 1000,
@@ -103,9 +118,12 @@
             },
             {
                 "value": 9
+            },
+            {
+                "value": 29
             }
         ],
-        "createDate": "2021-12-21T15:40:12.108Z"
+        "createDate": "2022-02-18T15:15:39.510Z"
     },
     {
         "id": "3826c77e-297e-4466-82b1-7ae074a00531",

@@ -37,14 +37,14 @@ export class JobEditDialogComponent {
             id: [data?.id || uuidv4()],
             title: [data?.title || '', Validators.required],
             type: [!!data ? data.type : JobType.Km, Validators.required],
-            colorType: [data?.colorType || ColorType.Zamena, Validators.required],
+            colorType: [!!data ? data.colorType : ColorType.Zamena, Validators.required],
             planValue: [data?.planValue || null, Validators.required],
             description: [data?.description || ''],
             cost: [data?.cost || null],
             optionalJobsOn: this.buildFormArray(data?.optionalJobsOn || []),
             skippedJobsOn: this.buildFormArray(data?.skippedJobsOn || []),
             justOnce: [data?.justOnce || false],
-            complitedJobs: [[]]
+            complitedJobs: [!!data ? data.complitedJobs || [] : []]
         });
 
         this.form.valueChanges.subscribe(console.log);
