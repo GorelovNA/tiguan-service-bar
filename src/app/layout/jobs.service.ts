@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { filter, map, mapTo, tap } from 'rxjs/operators';
+import { catchError, filter, map, mapTo, tap } from 'rxjs/operators';
 import { Job, JobType } from '../shared/job.interface';
 
 @Injectable()
@@ -12,7 +12,7 @@ export class JobsService {
     kmJobs$: Observable<Job[]>;
     timeJobs$: Observable<Job[]>;
 
-    private readonly HEADERS = new HttpHeaders().append('secret-key', '$2b$10$fRtylPnSgXAXia/G3QOBNexui3G7qN1oWSvbzZmLRIbp8oTLhIRAy');
+    private readonly HEADERS = new HttpHeaders().append('X-MASTER-KEY', '$2b$10$fRtylPnSgXAXia/G3QOBNexui3G7qN1oWSvbzZmLRIbp8oTLhIRAy');
 
     constructor(private http: HttpClient) {
         this.kmJobs$ = this.jobsSubject$.asObservable().pipe(
@@ -26,21 +26,24 @@ export class JobsService {
     }
 
     getList(): Observable<Job[]> {
-        return this.http.get<Job[]>('https://api.jsonbin.io/b/61ba0d0c0ddbee6f8b1e65a1/latest', {
+        return this.http.get<{ record: Job[] }>('https://api.jsonbin.io/v3/b/61ba0d0c0ddbee6f8b1e65a1/latest', {
             headers: this.HEADERS
         }).pipe(
-            tap(jobs => {
-                jobs.forEach(j => {
+            catchError(_ => this.http.get<Job[]>('assets/json/base.json').pipe(map(jobs => ({ record: jobs })))),
+            map(({ record }) => {
+                record.forEach(j => {
                     if (!j.complitedJobs) {
                         j.complitedJobs = [];
                     }
                 });
+
+                return record;
             })
         );
     }
 
     updateList(jobs: Job[]): Observable<void> {
-        return this.http.put<Job[]>('https://api.jsonbin.io/b/61ba0d0c0ddbee6f8b1e65a1', jobs, {
+        return this.http.put<Job[]>('https://api.jsonbin.io/v3/b/61ba0d0c0ddbee6f8b1e65a1', jobs, {
             headers: this.HEADERS,
         }).pipe(
             mapTo(void(0))
