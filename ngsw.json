@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1661239978134,
+  "timestamp": 1694686252479,
   "index": "https://gorelovna.github.io/tiguan-service-bar/index.html",
   "assetGroups": [
     {
@@ -68,7 +68,7 @@
     "https://gorelovna.github.io/tiguan-service-bar/assets/json/archive/base copy2.json": "9bc258d79e8ea94f6883bfa5928ed2967a5abb7e",
     "https://gorelovna.github.io/tiguan-service-bar/assets/json/base.json": "10548b206997012e364d9e80ed00fccf95675465",
     "https://gorelovna.github.io/tiguan-service-bar/favicon.ico": "4c349fbf85e1d3f6d98326fac8bf4ea8332c9a5f",
-    "https://gorelovna.github.io/tiguan-service-bar/index.html": "6ed0cf2c96379d84ae6948d76680ffed837b0182",
+    "https://gorelovna.github.io/tiguan-service-bar/index.html": "02029c12ea770e62d6b035b1b2ef0d5e23c10502",
     "https://gorelovna.github.io/tiguan-service-bar/main.0328fdbe03d932f4c00d.js": "d4f93fe8fb0b622efee821bd825801715ace44ef",
     "https://gorelovna.github.io/tiguan-service-bar/manifest.webmanifest": "09fcc31beda8d824ebcc853a71e6d7b8e4933952",
     "https://gorelovna.github.io/tiguan-service-bar/polyfills.297e52098208f3025ef2.js": "4583ea4040212bd032bc39cd5d24dccc13518d85",
