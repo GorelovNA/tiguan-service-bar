@@ -30,7 +30,7 @@ h2, h3, h4 {
         .preview {
             overflow-x: auto;
 
-            .mat-table {
+            .mat-mdc-table {
                 width: 100%;
             }
         }
@@ -40,10 +40,10 @@ h2, h3, h4 {
 .tooltip-inner {
     max-width: none !important;
 
-    .mat-table {
+    .mat-mdc-table {
         min-width: 350px;
 
-        .mat-cell, .mat-header-cell {
+        .mat-mdc-cell, .mat-mdc-header-cell {
             padding: 0 15px;
 
             &.description-cell {
@@ -53,7 +53,7 @@ h2, h3, h4 {
     }
 }
 
-td.mat-cell, th.mat-header-cell  {
+td.mat-mdc-cell, th.mat-mdc-header-cell  {
     padding: 2px 4px !important;
 
     &:first-of-type {

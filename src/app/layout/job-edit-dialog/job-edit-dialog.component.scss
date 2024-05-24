@@ -1,4 +1,4 @@
-mat-radio-button {
+.mat-mdc-radio-button {
     margin-right: 20px;
 }
 
@@ -16,7 +16,7 @@ form {
     display: flex;
     flex-direction: column;
 
-    mat-icon {
+    .mat-icon {
         cursor: pointer;
     }
 }

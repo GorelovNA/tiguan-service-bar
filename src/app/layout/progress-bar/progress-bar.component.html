@@ -2,7 +2,8 @@
 
 <div class="controls">
     <div class="scale-slider-container">
-        <mat-slider [max]="sliderMaxValue" [min]="sliderMinValue" [(ngModel)]="graphScale">
+        <mat-slider [max]="sliderMaxValue" [min]="sliderMinValue">
+            <input matSliderThumb [(ngModel)]="graphScale">
         </mat-slider>
         <label>Масштаб: {{graphScale}} {{isKmType ? 'т.км' : 'мес'}}</label>
     </div>
