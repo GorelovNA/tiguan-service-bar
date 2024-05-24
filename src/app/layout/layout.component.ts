@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MatLegacyDialog as MatDialog } from '@angular/material/legacy-dialog';
 import { filter, finalize, skip, takeUntil } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { AuthService } from '../core/auth.service';
@@ -8,6 +7,7 @@ import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.compon
 import { JobGraphDetails } from './progress-bar/progress-bar.component';
 import { JobsService } from './jobs.service';
 import { BaseComponent } from '../shared/base.class';
+import { MatDialog } from '@angular/material/dialog';
 
 export const TIGUAN_PURCHASE_DATE: Date = new Date(2021, 3, 1); // 1 Apr 21
 

@@ -1,6 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { UntypedFormControl } from '@angular/forms';
-import { MatLegacyCheckboxChange as MatCheckboxChange } from '@angular/material/legacy-checkbox';
 import { IFormControl } from '@rxweb/types';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
@@ -9,6 +8,7 @@ import { AuthService } from '../../core/auth.service';
 import { Job, ColorType, JobType } from '../../shared/job.interface';
 import { TIGUAN_PURCHASE_DATE } from '../layout.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { MatCheckboxChange } from '@angular/material/checkbox';
 
 
 export const MAX_KM_SIZE = 300; // т.км

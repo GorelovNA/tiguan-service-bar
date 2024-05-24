@@ -1,9 +1,10 @@
 import { Component, Inject } from '@angular/core';
 import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
-import { MatLegacyDialogRef as MatDialogRef, MAT_LEGACY_DIALOG_DATA as MAT_DIALOG_DATA } from '@angular/material/legacy-dialog';
+
 import { IFormArray, IFormBuilder, IFormGroup } from '@rxweb/types';
 import { Job, JobType, ColorType } from '../../shared/job.interface';
 import { v4 as uuidv4 } from 'uuid';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-job-edit-dialog',

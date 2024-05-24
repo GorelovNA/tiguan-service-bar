@@ -1,9 +1,10 @@
 import { AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild } from '@angular/core';
 import { MatSort } from '@angular/material/sort';
-import { MatLegacyTableDataSource as MatTableDataSource } from '@angular/material/legacy-table';
+
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth.service';
 import { Job, JobType, ColorType } from '../../shared/job.interface';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
     selector: 'app-job-list',
