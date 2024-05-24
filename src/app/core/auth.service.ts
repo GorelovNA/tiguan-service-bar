@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 const jwtEncode = require('jwt-encode');
-import jwt_decode from 'jwt-decode';
+import { jwtDecode } from "jwt-decode";
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
@@ -33,7 +33,7 @@ export class AuthService {
         const accessToken = localStorage.getItem('access_token') || '';
 
         try {
-            const user: User = jwt_decode(accessToken);
+            const user: User = jwtDecode(accessToken);
             this.login(user);
         } catch (error) {
             console.error('необходимо авторизироваться на сайте');
