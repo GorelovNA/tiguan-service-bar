@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { takeUntil } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
@@ -11,14 +11,14 @@ import { BaseComponent } from '../shared/base.class';
     styleUrls: ['./auth.component.scss'],
 })
 export class AuthComponent extends BaseComponent implements OnInit {
-    form: FormGroup;
+    form: UntypedFormGroup;
 
     showPassword = false;
 
     errorMessage: string | null = null;
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         private authService: AuthService,
         private router: Router,
     ) {

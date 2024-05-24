@@ -1,5 +1,5 @@
 import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormControl, Validators } from '@angular/forms';
+import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { IFormArray, IFormBuilder, IFormGroup } from '@rxweb/types';
 import { Job, JobType, ColorType } from '../../shared/job.interface';
@@ -29,7 +29,7 @@ export class JobEditDialogComponent {
     }
 
     constructor(
-        private fb: FormBuilder,
+        private fb: UntypedFormBuilder,
         public dialogRef: MatDialogRef<JobEditDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: Job | null = null,
     ) {
@@ -66,16 +66,16 @@ export class JobEditDialogComponent {
     }
 
     addNewOptionalJob(): void {
-        this.optionalJobsFormArray.push(new FormControl(null, Validators.required));
+        this.optionalJobsFormArray.push(new UntypedFormControl(null, Validators.required));
     }
 
     addNewSkippedJob(): void {
-        this.skippedJobsFormArray.push(new FormControl(null, Validators.required));
+        this.skippedJobsFormArray.push(new UntypedFormControl(null, Validators.required));
     }
 
     private buildFormArray(value: number[]): IFormArray<number> {
         return (this.fb as IFormBuilder).array(value.map(v => {
-            return new FormControl(v, Validators.required);
+            return new UntypedFormControl(v, Validators.required);
         }));
     }
 }

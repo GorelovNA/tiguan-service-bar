@@ -126,7 +126,6 @@
       }
     }
   },
-  "defaultProject": "tiguan-service-bar",
   "cli": {
     "analytics": "7656ae08-f0f2-4080-b2a5-865e85824c43"
   }

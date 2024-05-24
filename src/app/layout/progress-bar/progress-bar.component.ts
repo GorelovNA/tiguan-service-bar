@@ -1,5 +1,5 @@
 import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormControl } from '@angular/forms';
+import { UntypedFormControl } from '@angular/forms';
 import { MatCheckboxChange } from '@angular/material/checkbox';
 import { IFormControl } from '@rxweb/types';
 import { Observable } from 'rxjs';
@@ -46,7 +46,7 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
 
     scaleSteps: { value: number; text: string | Date }[] = [];
 
-    currentValueCtrl: IFormControl<number> = new FormControl(0);
+    currentValueCtrl: IFormControl<number> = new UntypedFormControl(0);
 
     sliderMaxValue: number = this.isKmType ? 100 : 48;
     sliderMinValue: number = this.isKmType ? 30 : 18;
