@@ -229,8 +229,6 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
   }
 
   scrollToCurrent(additionalScrollValue?: number): void {
-    console.log('here');
-
     this.element.nativeElement.querySelector('#car')?.scrollIntoView();
 
     if (additionalScrollValue) {

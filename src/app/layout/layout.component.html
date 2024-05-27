@@ -2,24 +2,19 @@
   Роль: {{ userRole() }}
   <button mat-raised-button color="primary" (click)="logout()">Logout</button>
 </div>
-<ng-container *ngIf="!isLoading; else showSpinner">
+<ng-container *ngIf="!isLoading(); else showSpinner">
   <hr />
-
-  <ng-container *ngIf="kmJobs$ | async as kmJobs">
-    <app-progress-bar
-      *ngIf="kmJobs.length"
-      [jobs]="kmJobs"
-      [currentValue]="currentKmValue"
-    ></app-progress-bar>
-  </ng-container>
+  <app-progress-bar
+    *ngIf="kmJobs().length"
+    [jobs]="kmJobs()"
+    [currentValue]="currentKmValue"
+  ></app-progress-bar>
   <hr />
-  <ng-container *ngIf="timeJobs$ | async as timeJobs">
-    <app-progress-bar
-      *ngIf="timeJobs.length"
-      [jobs]="timeJobs"
-      [currentValue]="possTime"
-    ></app-progress-bar>
-  </ng-container>
+  <app-progress-bar
+    *ngIf="timeJobs().length"
+    [jobs]="timeJobs()"
+    [currentValue]="possTime"
+  ></app-progress-bar>
 
   <br />
   <hr />
@@ -32,8 +27,8 @@
   <br />
 
   <app-job-list
-    *ngIf="jobList?.length"
-    [jobs]="(allJobs$ | async)!"
+    *ngIf="allJobs()?.length"
+    [jobs]="allJobs()"
     (edited)="onEdit($event)"
     (deleted)="onDelete($event)"
   ></app-job-list>

@@ -1,6 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { filter, finalize, skip, takeUntil } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { Component } from '@angular/core';
+import { filter, takeUntil } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 import { Job } from '../shared/job.interface';
 import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
@@ -15,12 +14,10 @@ export const TIGUAN_PURCHASE_DATE: Date = new Date(2021, 3, 1); // 1 Apr 21
   templateUrl: './layout.component.html',
   styleUrls: ['./layout.component.scss']
 })
-export class LayoutComponent extends BaseComponent implements OnInit {
-  allJobs$: Observable<Job[]> = this.jobsService.jobsSubject$
-    .asObservable()
-    .pipe(filter((jobs): jobs is Job[] => !!jobs));
-  kmJobs$: Observable<Job[]> = this.jobsService.kmJobs$;
-  timeJobs$: Observable<Job[]> = this.jobsService.timeJobs$;
+export class LayoutComponent extends BaseComponent {
+  allJobs = this.jobsService.allJobs;
+  kmJobs = this.jobsService.kmJobs;
+  timeJobs = this.jobsService.timeJobs;
 
   userRole = this.authService.userRole;
 
@@ -28,11 +25,7 @@ export class LayoutComponent extends BaseComponent implements OnInit {
 
   currentKmValue = Number(localStorage.getItem('currentKmValue') || '0');
 
-  isLoading = true;
-
-  get jobList(): Job[] {
-    return this.jobsService.jobsSubject$.value || [];
-  }
+  isLoading = this.jobsService.isLoading;
 
   readonly possTime: number = // время владения
     this.monthDiff(TIGUAN_PURCHASE_DATE, new Date());
@@ -45,38 +38,16 @@ export class LayoutComponent extends BaseComponent implements OnInit {
     super();
   }
 
-  ngOnInit(): void {
-    this.jobsService
-      .getList()
-      .pipe(
-        finalize(() => (this.isLoading = false)),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(res => {
-        this.jobsService.jobsSubject$.next(res);
-      });
-
-    this.jobsService.jobsSubject$
-      .pipe(
-        filter((jobs): jobs is Job[] => !!jobs),
-        skip(1),
-        takeUntil(this.destroy$)
-      )
-      .subscribe(res => {
-        this.saveJobs(res);
-      });
-  }
-
   add(): void {
     this.openJobDialog();
   }
 
   onEdit(id: string): void {
-    this.openJobDialog(this.jobList.find(j => j.id === id));
+    this.openJobDialog(this.allJobs().find(j => j.id === id));
   }
 
   onDelete(id: string): void {
-    this.jobsService.jobsSubject$.next(this.jobList.filter(j => j.id !== id));
+    this.jobsService.setJobs(this.allJobs().filter(j => j.id !== id));
   }
 
   logout(): void {
@@ -96,14 +67,14 @@ export class LayoutComponent extends BaseComponent implements OnInit {
       )
       .subscribe(result => {
         console.log(`Dialog result: `, JSON.stringify(result));
-        const currJobIndex = this.jobList.findIndex(j => j.id === result?.id);
+        const currJobIndex = this.allJobs().findIndex(j => j.id === result?.id);
 
         if (currJobIndex !== -1) {
-          const arr = [...this.jobList];
+          const arr = [...this.allJobs()];
           arr.splice(currJobIndex, 1, result);
-          this.jobsService.jobsSubject$.next(arr);
+          this.jobsService.setJobs(arr);
         } else {
-          this.jobsService.jobsSubject$.next([...this.jobList, result]);
+          this.jobsService.setJobs([...this.allJobs(), result]);
         }
       });
   }
@@ -114,9 +85,5 @@ export class LayoutComponent extends BaseComponent implements OnInit {
     months -= d1.getMonth();
     months += d2.getMonth();
     return months <= 0 ? 0 : months;
-  }
-
-  private saveJobs(jobs: Job[]): void {
-    this.jobsService.updateList(jobs).pipe(takeUntil(this.destroy$)).subscribe();
   }
 }

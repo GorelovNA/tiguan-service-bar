@@ -1,15 +1,19 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { catchError, filter, map, mapTo, tap } from 'rxjs/operators';
+import { Injectable, computed, signal } from '@angular/core';
+import { Observable } from 'rxjs';
+import { catchError, finalize, map, takeUntil } from 'rxjs/operators';
 import { Job, JobType } from '../shared/job.interface';
+import { BaseComponent } from '../shared/base.class';
 
 @Injectable({ providedIn: 'root' })
-export class JobsService {
-  jobsSubject$: BehaviorSubject<Job[] | null> = new BehaviorSubject<Job[] | null>(null);
+export class JobsService extends BaseComponent {
+  allJobs = computed(() => this._jobs() || []);
+  kmJobs = computed(() => this._jobs()?.filter(j => j.type === JobType.Km) || []);
+  timeJobs = computed(() => this._jobs()?.filter(j => j.type === JobType.Time) || []);
+  isLoading = computed(() => this._isLoading());
 
-  kmJobs$: Observable<Job[]>;
-  timeJobs$: Observable<Job[]>;
+  private readonly _jobs = signal<Job[] | null>(null);
+  private readonly _isLoading = signal<boolean>(true);
 
   private readonly HEADERS = new HttpHeaders().append(
     'X-MASTER-KEY',
@@ -17,14 +21,21 @@ export class JobsService {
   );
 
   constructor(private http: HttpClient) {
-    this.kmJobs$ = this.jobsSubject$.asObservable().pipe(
-      filter((jobs): jobs is Job[] => !!jobs),
-      map(jobs => jobs.filter(j => j.type === JobType.Km))
-    );
-    this.timeJobs$ = this.jobsSubject$.asObservable().pipe(
-      filter((jobs): jobs is Job[] => !!jobs),
-      map(jobs => jobs.filter(j => j.type === JobType.Time))
-    );
+    super();
+
+    this.getList()
+      .pipe(
+        finalize(() => this._isLoading.set(false)),
+        takeUntil(this.destroy$)
+      )
+      .subscribe(jobs => {
+        this._jobs.set(jobs);
+      });
+  }
+
+  setJobs(jobs: Job[]): void {
+    this._jobs.set(jobs);
+    this.updateList(jobs).pipe(takeUntil(this.destroy$)).subscribe();
   }
 
   getList(): Observable<Job[]> {
@@ -48,11 +59,11 @@ export class JobsService {
       );
   }
 
-  updateList(jobs: Job[]): Observable<void> {
+  private updateList(jobs: Job[]): Observable<void> {
     return this.http
       .put<Job[]>('https://api.jsonbin.io/v3/b/61ba0d0c0ddbee6f8b1e65a1', jobs, {
         headers: this.HEADERS
       })
-      .pipe(mapTo(void 0));
+      .pipe(map(() => void 0));
   }
 }

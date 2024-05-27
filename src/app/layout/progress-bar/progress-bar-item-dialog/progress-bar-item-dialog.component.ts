@@ -3,13 +3,11 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { JobGraphDetails, JobGraphItem } from '../progress-bar.component';
 import { MaterialModule } from '../../../shared/material.module';
 import { MatCheckboxChange } from '@angular/material/checkbox';
-import { ColorType, Job } from '../../../shared/job.interface';
+import { ColorType } from '../../../shared/job.interface';
 import { TIGUAN_PURCHASE_DATE } from '../../layout.component';
 import { JobsService } from '../../jobs.service';
-import { takeUntil } from 'rxjs/operators';
 import { BaseComponent } from '../../../shared/base.class';
 import { CommonModule } from '@angular/common';
-import { Observable } from 'rxjs';
 import { AuthService } from '../../../core/auth.service';
 
 @Component({
@@ -25,9 +23,7 @@ export class ProgressBarItemDialogComponent extends BaseComponent {
 
   isAdmin = this.authService.isAdmin;
 
-  get jobList(): Job[] {
-    return this.jobsService.jobsSubject$.value || [];
-  }
+  allJobs = this.jobsService.allJobs;
 
   constructor(
     public dialogRef: MatDialogRef<ProgressBarItemDialogComponent>,
@@ -47,13 +43,13 @@ export class ProgressBarItemDialogComponent extends BaseComponent {
     job.jobComplited = event.checked;
     item.complited = item.jobs.every(j => j.jobComplited);
 
-    const existedJob = this.jobList.find(j => j.id === job.id);
+    const existedJob = this.allJobs().find(j => j.id === job.id);
     if (!event.checked) {
       existedJob!.complitedJobs = existedJob!.complitedJobs.filter(c => c.value !== job.value);
     } else {
       existedJob!.complitedJobs.push({ value: job.value });
     }
 
-    this.jobsService.updateList(this.jobList).pipe(takeUntil(this.destroy$)).subscribe();
+    this.jobsService.setJobs(this.allJobs());
   }
 }
