@@ -1,77 +1,119 @@
-
-
 <div class="controls">
-    <div class="scale-slider-container">
-        <mat-slider [max]="sliderMaxValue" [min]="sliderMinValue">
-            <input matSliderThumb [(ngModel)]="graphScale">
-        </mat-slider>
-        <label>Масштаб: {{graphScale}} {{isKmType ? 'т.км' : 'мес'}}</label>
-    </div>
-    <div *ngIf="isKmType">
-        <mat-form-field appearance="outline">
-            <mat-label>Текущий пробег</mat-label>
-            <input matInput [formControl]="currentValueCtrl" type="number" placeholder="Например: 30 (т.км)">
-          </mat-form-field>
-    </div>
-    <button (click)="scrollToCurrent()" mat-stroked-button color="primary">Scroll to current</button>
+  <div class="scale-slider-container">
+    <mat-slider [max]="sliderMaxValue" [min]="sliderMinValue">
+      <input matSliderThumb [(ngModel)]="graphScale" />
+    </mat-slider>
+    <label>Масштаб: {{ graphScale }} {{ isKmType ? 'т.км' : 'мес' }}</label>
+  </div>
+  <div *ngIf="isKmType">
+    <mat-form-field appearance="outline">
+      <mat-label>Текущий пробег</mat-label>
+      <input
+        matInput
+        [formControl]="currentValueCtrl"
+        type="number"
+        placeholder="Например: 30 (т.км)"
+      />
+    </mat-form-field>
+  </div>
+  <button (click)="scrollToCurrent()" mat-stroked-button color="primary">Scroll to current</button>
 </div>
 
 <div class="progress-bar-container" id="scrollBlock">
-    <div class="progress-container">
-        <div class="scale-steps-container">
-            <span *ngFor="let step of scaleSteps" class="scale-step" [style.left.%]="getItemMargin(step.value)">{{ isKmType ? step.text : step.text | date:'MMM y' }}</span>
+  <div class="progress-container">
+    <div class="scale-steps-container">
+      <span
+        *ngFor="let step of scaleSteps"
+        class="scale-step"
+        [style.left.%]="getItemMargin(step.value)"
+        >{{ isKmType ? step.text : (step.text | date: 'MMM y') }}</span
+      >
+    </div>
+    <mat-progress-bar
+      mode="determinate"
+      [value]="progreesBarValue"
+      [style.width.%]="progreesBarWidth"
+    ></mat-progress-bar>
+    <img
+      id="car"
+      class="car"
+      [style.left.%]="getItemMargin(currentValue)"
+      src="assets/images/tiguan.png"
+      alt=""
+    />
+  </div>
+
+  <div class="items-container">
+    <div
+      class="item"
+      *ngFor="let item of jobGraphItems"
+      [style.left]="getItemMargin(item.value) + '%'"
+      container="body"
+      triggers="click"
+      [autoClose]="'outside'"
+    >
+      <mat-icon
+        [matBadge]="item.jobs.length"
+        matBadgeColor="warn"
+        matBadgeSize="small"
+        [matBadgeHidden]="item.jobs.length === 1"
+        color="primary"
+        [class.complited]="item.complited"
+        >{{ item.icon }}</mat-icon
+      >
+
+      <!-- TODO -->
+      <ng-template #tipContent>
+        <div class="preview">
+          <h2>Работы на пробеге: {{ item.value }} {{ isKmType ? 'т.км' : 'мес' }}</h2>
+          <h3 *ngIf="!isKmType">{{ getDateByValue(item.value) | date: 'MMM y' }}</h3>
+          <h4 *ngIf="item.fullCost">Общая стоимость: {{ item.fullCost }} ₽</h4>
+          <table mat-table [dataSource]="item.jobs">
+            <ng-container matColumnDef="title">
+              <th mat-header-cell *matHeaderCellDef>Название</th>
+              <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+            </ng-container>
+            <ng-container matColumnDef="colorType">
+              <th mat-header-cell *matHeaderCellDef>Вид работ</th>
+              <td mat-cell *matCellDef="let element">
+                {{ element.colorType === colorType.Prisadka ? 'Присадка' : 'Замена' }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="description">
+              <th mat-header-cell *matHeaderCellDef>Комментарий</th>
+              <td mat-cell *matCellDef="let element" class="description-cell">
+                {{ element.description }}
+              </td>
+            </ng-container>
+            <ng-container matColumnDef="cost">
+              <th mat-header-cell *matHeaderCellDef>Стоимость, ₽</th>
+              <td mat-cell *matCellDef="let element">{{ element.cost }}</td>
+            </ng-container>
+            <ng-container matColumnDef="complited">
+              <th mat-header-cell *matHeaderCellDef>Работы выполнены</th>
+              <td mat-cell *matCellDef="let element">
+                <mat-checkbox
+                  [checked]="element.jobComplited"
+                  (change)="onCompliteChanged(item, element, $event)"
+                  [disabled]="!(isAdmin$ | async)"
+                ></mat-checkbox>
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="['title', 'colorType', 'description', 'cost', 'complited']"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="
+                let row;
+                columns: ['title', 'colorType', 'description', 'cost', 'complited']
+              "
+            ></tr>
+          </table>
         </div>
-        <mat-progress-bar mode="determinate"
-            [value]="progreesBarValue"
-            [style.width.%]="progreesBarWidth"
-        ></mat-progress-bar>
-        <img id="car" class="car" [style.left.%]="getItemMargin(currentValue)" src="assets/images/tiguan.png" alt="">
+      </ng-template>
     </div>
-
-    <div class="items-container">
-        <div class="item" *ngFor="let item of jobGraphItems" [style.left]="getItemMargin(item.value) + '%'" container="body" triggers="click" [autoClose]="'outside'">
-            <mat-icon
-                [matBadge]="item.jobs.length"
-                matBadgeColor="warn"
-                matBadgeSize="small"
-                [matBadgeHidden]="item.jobs.length === 1"
-                color="primary"
-                [class.complited]="item.complited"
-            >{{ item.icon }}</mat-icon>
-
-
-            <!-- TODO -->
-            <ng-template #tipContent>
-                <div class="preview">
-                    <h2>Работы на пробеге: {{ item.value }} {{isKmType ? 'т.км' : 'мес'}}</h2>
-                    <h3 *ngIf="!isKmType">{{ getDateByValue(item.value) | date:'MMM y' }}</h3>
-                    <h4 *ngIf="item.fullCost">Общая стоимость: {{ item.fullCost }} ₽</h4>
-                    <table mat-table [dataSource]="item.jobs">
-                        <ng-container matColumnDef="title">
-                        <th mat-header-cell *matHeaderCellDef> Название </th>
-                        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="colorType">
-                        <th mat-header-cell *matHeaderCellDef> Вид работ </th>
-                        <td mat-cell *matCellDef="let element"> {{ element.colorType === colorType.Prisadka ? 'Присадка' : 'Замена' }} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="description">
-                        <th mat-header-cell *matHeaderCellDef> Комментарий </th>
-                        <td mat-cell *matCellDef="let element" class="description-cell"> {{element.description}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="cost">
-                        <th mat-header-cell *matHeaderCellDef> Стоимость, ₽ </th>
-                        <td mat-cell *matCellDef="let element"> {{element.cost}} </td>
-                        </ng-container>
-                        <ng-container matColumnDef="complited">
-                        <th mat-header-cell *matHeaderCellDef> Работы выполнены </th>
-                        <td mat-cell *matCellDef="let element"><mat-checkbox [checked]="element.jobComplited" (change)="onCompliteChanged(item, element, $event)" [disabled]="!(isAdmin$ | async)"></mat-checkbox></td>
-                        </ng-container>
-
-                        <tr mat-header-row *matHeaderRowDef="[ 'title', 'colorType', 'description', 'cost', 'complited' ]"></tr>
-                        <tr mat-row *matRowDef="let row; columns: [ 'title', 'colorType', 'description', 'cost', 'complited' ];"></tr>
-                    </table>
-                </div>
-            </ng-template>
-    </div>
+  </div>
 </div>

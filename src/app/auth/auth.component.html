@@ -2,16 +2,27 @@
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Введите логин</mat-label>
-      <input matInput placeholder="ex.: ivanov" formControlName="username">
+      <input matInput placeholder="ex.: ivanov" formControlName="username" />
       <mat-error *ngIf="form.controls.username.invalid">Поле обязательно для заполнения</mat-error>
     </mat-form-field>
   </div>
   <div>
     <mat-form-field appearance="outline">
       <mat-label>Введите пароль</mat-label>
-      <input matInput placeholder="ex.: ivanov" formControlName="password" [type]="!showPassword ? 'password' : 'text'">
-      <button mat-icon-button matSuffix (click)="showPassword = !showPassword" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="!showPassword">
-        <mat-icon>{{ !showPassword ? 'visibility_off' : 'visibility'}}</mat-icon>
+      <input
+        matInput
+        placeholder="ex.: ivanov"
+        formControlName="password"
+        [type]="!showPassword ? 'password' : 'text'"
+      />
+      <button
+        mat-icon-button
+        matSuffix
+        (click)="showPassword = !showPassword"
+        [attr.aria-label]="'Hide password'"
+        [attr.aria-pressed]="!showPassword"
+      >
+        <mat-icon>{{ !showPassword ? 'visibility_off' : 'visibility' }}</mat-icon>
       </button>
       <mat-error *ngIf="form.controls.password.invalid">Поле обязательно для заполнения</mat-error>
     </mat-form-field>
@@ -19,5 +30,7 @@
   <p *ngIf="errorMessage">
     <mat-error>{{ errorMessage }}</mat-error>
   </p>
-  <button mat-stroked-button color="primary" [disabled]="form.invalid || errorMessage">Войти</button>
+  <button mat-stroked-button color="primary" [disabled]="form.invalid || errorMessage">
+    Войти
+  </button>
 </form>

@@ -9,20 +9,8 @@ import { LayoutRoutingModule } from './layout-routing.module';
 import { LayoutComponent } from './layout.component';
 import { ProgressBarComponent } from './progress-bar/progress-bar.component';
 
-
 @NgModule({
-    declarations: [
-        LayoutComponent,
-        JobListComponent,
-        JobEditDialogComponent,
-        ProgressBarComponent
-    ],
-    imports: [
-        LayoutRoutingModule,
-        CommonModule,
-        FormsModule,
-        ReactiveFormsModule,
-        MaterialModule
-    ],
+  declarations: [LayoutComponent, JobListComponent, JobEditDialogComponent, ProgressBarComponent],
+  imports: [LayoutRoutingModule, CommonModule, FormsModule, ReactiveFormsModule, MaterialModule]
 })
-export class LayoutModule { }
+export class LayoutModule {}

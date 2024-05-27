@@ -8,6 +8,8 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
+    "format-aux": "prettier",
+    "format": "npm run format-aux -- --write .",
     "deploy-gh": "ng build --configuration production --base-href https://gorelovna.github.io/tiguan-service-bar/ && ngh --dir=dist/tiguan-service-bar"
   },
   "private": true,
@@ -52,7 +54,8 @@
     "ts-node": "~10.9.2",
     "tslint": "~6.1.0",
     "typescript": "~5.4.2",
-    "uuid": "^9.0.1"
+    "uuid": "^9.0.1",
+    "prettier-plugin-sort-json": "^4.0.0"
   },
   "repository": {
     "type": "git",

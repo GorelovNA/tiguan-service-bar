@@ -1,22 +1,21 @@
 .mat-mdc-radio-button {
-    margin-right: 20px;
+  margin-right: 20px;
 }
 
 .form-field {
-    padding-bottom: 1.34375em;
+  padding-bottom: 1.34375em;
 }
 
 form {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-
 .optional-jobs-container {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 
-    .mat-icon {
-        cursor: pointer;
-    }
+  .mat-icon {
+    cursor: pointer;
+  }
 }

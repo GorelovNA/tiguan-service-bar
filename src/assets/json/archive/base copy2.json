@@ -1,241 +1,231 @@
 [
-    {
-        "id": "cd3d233e-7828-4006-bca5-650f428127b6",
-        "title": "Замена масла в двигателе",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 6,
-        "description": "Масло (Mobil1 0w20) 5,7л\nФильтр масляный\nПробка с уплот. кольцом масляного поддона ",
-        "cost": 10500,
-        "optionalJobsOn": [
-            3
-        ],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 3
-            },
-            {
-                "value": 9
-            },
-            {
-                "value": 15
-            }
-        ],
-        "createDate": "2021-12-21T15:33:50.429Z"
-    },
-    {
-        "id": "7f8eb865-1510-46ad-a41c-ad0e4840e1df",
-        "title": "Инспекционный сервис",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 15,
-        "description": "Раз в ТО.\nИнспекционная диагностика на дилере",
-        "cost": 2300,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 15
-            }
-        ],
-        "createDate": "2021-12-21T15:35:02.220Z"
-    },
-    {
-        "id": "e7932cae-16f0-4e8e-9d9b-67e17c65d829",
-        "title": "Промывка масляной системы",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 37.5,
-        "description": "LIQUI MOLY 7592 Oilsystem Spulung High Performance Benzin",
-        "cost": 1800,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-21T15:38:09.481Z"
-    },
-    {
-        "id": "10f0e7b1-0270-4d3c-8c89-d782460f9831",
-        "title": "Воздушный фильтр",
-        "type": 0,
-        "colorType": 1,
-        "planValue": 12,
-        "description": "Оригинал или Mann(сложно проверить на подлинность)",
-        "cost": null,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-18T21:20:49.086Z"
-    },
-    {
-        "id": "7511c66d-7a31-4087-9ced-8439bde68975",
-        "title": "Салонный фильтр",
-        "type": 0,
-        "colorType": 1,
-        "planValue": 12,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "description": "Оригинал. Гипоалергенный а не угольный",
-        "justOnce": false,
-        "createDate": "2021-12-06T17:10:35.093Z",
-        "complitedJobs": []
-    },
-    {
-        "id": "6f9c331a-387a-48a9-9aa6-73660e34dc0b",
-        "title": "Присадка в топливную систему",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 10,
-        "description": "P1101 PRO-TEC Очиститель топливной системы / Fuel Line Cleaner\n* заказывал у VAG Center спб",
-        "cost": 1000,
-        "optionalJobsOn": [
-            9
-        ],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 19
-            },
-            {
-                "value": 9
-            }
-        ],
-        "createDate": "2021-12-21T15:40:12.108Z"
-    },
-    {
-        "id": "3826c77e-297e-4466-82b1-7ae074a00531",
-        "title": "Свечи зажигания",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 30,
-        "description": "Оригинал",
-        "cost": 7073,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-21T15:43:47.474Z"
-    },
-    {
-        "id": "63d2e3d3-5f3b-4c52-a60c-1690b0edbe8f",
-        "title": "Проверить цепь ГРМ",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 100,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "description": "Проверить, если плохо - заменить (по регламенту должна до 140ткм ходить)",
-        "justOnce": true,
-        "createDate": "2021-12-06T17:24:01.273Z",
-        "complitedJobs": []
-    },
-    {
-        "id": "182f65ca-7c6c-410c-9df4-a18e9d468012",
-        "title": "Приводной ремень",
-        "type": 0,
-        "colorType": 1,
-        "planValue": 60,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "description": "Оригинал\nЗамена раз в 5 лет либо по износу",
-        "justOnce": false,
-        "createDate": "2021-12-06T17:27:31.615Z",
-        "complitedJobs": []
-    },
-    {
-        "id": "05753e17-8886-4439-9271-ebcc31181f98",
-        "title": "Мыть впуск / Раскоксовка",
-        "type": 1,
-        "colorType": 0,
-        "planValue": 80,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "description": "GZOX",
-        "justOnce": false,
-        "createDate": "2021-12-06T17:41:09.070Z",
-        "complitedJobs": []
-    },
-    {
-        "id": "d89f969e-6da7-45c7-9d79-a7128dd43238",
-        "title": "Замена антифриза",
-        "type": 0,
-        "colorType": 1,
-        "planValue": 24,
-        "description": "VW G12 EVO (с осени 2020)\n***..A2 - готовая смесь\n***..М2 - концентрат (разбавляется дистилированной водой)",
-        "cost": null,
-        "optionalJobsOn": [
-            36
-        ],
-        "skippedJobsOn": [
-            24
-        ],
-        "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2022-02-03T11:26:58.504Z"
-    },
-    {
-        "id": "d0eb7c37-959e-4687-acd8-732bf33572eb",
-        "title": "Мыть радиатор",
-        "type": 0,
-        "colorType": 1,
-        "planValue": 24,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "description": "Очиститель наружной поверхности радиатора Kuhler Aussenreiniger + кёрхер под маленьким давлением",
-        "justOnce": false,
-        "createDate": "2021-12-06T17:52:00.645Z",
-        "complitedJobs": []
-    },
-    {
-        "id": "5ec3ff55-477c-4e38-95c8-429c28a0e67e",
-        "title": "Замена масла в коробке",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 60,
-        "description": "Только оригинал",
-        "cost": 16477,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [],
-        "createDate": "2021-12-21T15:46:39.059Z"
-    },
-    {
-        "id": "5f0e4616-13c4-4340-9906-231bbf21b28f",
-        "title": "Замена масла в муфте Haldex",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 60,
-        "optionalJobsOn": [],
-        "skippedJobsOn": [],
-        "description": "если Haldex 4 поколения - то фильтр от Вольво, если 5ого - ремкомплект подкачивающего насоса с уплотнителями",
-        "justOnce": false,
-        "createDate": "2021-12-07T07:13:13.886Z",
-        "complitedJobs": []
-    },
-    {
-        "id": "c2ad70a7-242b-4a9e-994f-eb514b35ebec",
-        "title": "Антифрикционная присадка",
-        "type": 1,
-        "colorType": 1,
-        "planValue": 30,
-        "description": "В масляную систему\nLIQUI MOLY Cera Tec",
-        "cost": 1609,
-        "optionalJobsOn": [
-            9
-        ],
-        "skippedJobsOn": [],
-        "justOnce": false,
-        "complitedJobs": [
-            {
-                "value": 9
-            }
-        ],
-        "createDate": "2021-12-21T15:51:11.672Z"
-    }
+  {
+    "colorType": 1,
+    "complitedJobs": [
+      {
+        "value": 3
+      },
+      {
+        "value": 9
+      },
+      {
+        "value": 15
+      }
+    ],
+    "cost": 10500,
+    "createDate": "2021-12-21T15:33:50.429Z",
+    "description": "Масло (Mobil1 0w20) 5,7л\nФильтр масляный\nПробка с уплот. кольцом масляного поддона ",
+    "id": "cd3d233e-7828-4006-bca5-650f428127b6",
+    "justOnce": false,
+    "optionalJobsOn": [3],
+    "planValue": 6,
+    "skippedJobsOn": [],
+    "title": "Замена масла в двигателе",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [
+      {
+        "value": 15
+      }
+    ],
+    "cost": 2300,
+    "createDate": "2021-12-21T15:35:02.220Z",
+    "description": "Раз в ТО.\nИнспекционная диагностика на дилере",
+    "id": "7f8eb865-1510-46ad-a41c-ad0e4840e1df",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 15,
+    "skippedJobsOn": [],
+    "title": "Инспекционный сервис",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "cost": 1800,
+    "createDate": "2021-12-21T15:38:09.481Z",
+    "description": "LIQUI MOLY 7592 Oilsystem Spulung High Performance Benzin",
+    "id": "e7932cae-16f0-4e8e-9d9b-67e17c65d829",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 37.5,
+    "skippedJobsOn": [],
+    "title": "Промывка масляной системы",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "cost": null,
+    "createDate": "2021-12-18T21:20:49.086Z",
+    "description": "Оригинал или Mann(сложно проверить на подлинность)",
+    "id": "10f0e7b1-0270-4d3c-8c89-d782460f9831",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 12,
+    "skippedJobsOn": [],
+    "title": "Воздушный фильтр",
+    "type": 0
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "createDate": "2021-12-06T17:10:35.093Z",
+    "description": "Оригинал. Гипоалергенный а не угольный",
+    "id": "7511c66d-7a31-4087-9ced-8439bde68975",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 12,
+    "skippedJobsOn": [],
+    "title": "Салонный фильтр",
+    "type": 0
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [
+      {
+        "value": 19
+      },
+      {
+        "value": 9
+      }
+    ],
+    "cost": 1000,
+    "createDate": "2021-12-21T15:40:12.108Z",
+    "description": "P1101 PRO-TEC Очиститель топливной системы / Fuel Line Cleaner\n* заказывал у VAG Center спб",
+    "id": "6f9c331a-387a-48a9-9aa6-73660e34dc0b",
+    "justOnce": false,
+    "optionalJobsOn": [9],
+    "planValue": 10,
+    "skippedJobsOn": [],
+    "title": "Присадка в топливную систему",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "cost": 7073,
+    "createDate": "2021-12-21T15:43:47.474Z",
+    "description": "Оригинал",
+    "id": "3826c77e-297e-4466-82b1-7ae074a00531",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 30,
+    "skippedJobsOn": [],
+    "title": "Свечи зажигания",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "createDate": "2021-12-06T17:24:01.273Z",
+    "description": "Проверить, если плохо - заменить (по регламенту должна до 140ткм ходить)",
+    "id": "63d2e3d3-5f3b-4c52-a60c-1690b0edbe8f",
+    "justOnce": true,
+    "optionalJobsOn": [],
+    "planValue": 100,
+    "skippedJobsOn": [],
+    "title": "Проверить цепь ГРМ",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "createDate": "2021-12-06T17:27:31.615Z",
+    "description": "Оригинал\nЗамена раз в 5 лет либо по износу",
+    "id": "182f65ca-7c6c-410c-9df4-a18e9d468012",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 60,
+    "skippedJobsOn": [],
+    "title": "Приводной ремень",
+    "type": 0
+  },
+  {
+    "colorType": 0,
+    "complitedJobs": [],
+    "createDate": "2021-12-06T17:41:09.070Z",
+    "description": "GZOX",
+    "id": "05753e17-8886-4439-9271-ebcc31181f98",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 80,
+    "skippedJobsOn": [],
+    "title": "Мыть впуск / Раскоксовка",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "cost": null,
+    "createDate": "2022-02-03T11:26:58.504Z",
+    "description": "VW G12 EVO (с осени 2020)\n***..A2 - готовая смесь\n***..М2 - концентрат (разбавляется дистилированной водой)",
+    "id": "d89f969e-6da7-45c7-9d79-a7128dd43238",
+    "justOnce": false,
+    "optionalJobsOn": [36],
+    "planValue": 24,
+    "skippedJobsOn": [24],
+    "title": "Замена антифриза",
+    "type": 0
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "createDate": "2021-12-06T17:52:00.645Z",
+    "description": "Очиститель наружной поверхности радиатора Kuhler Aussenreiniger + кёрхер под маленьким давлением",
+    "id": "d0eb7c37-959e-4687-acd8-732bf33572eb",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 24,
+    "skippedJobsOn": [],
+    "title": "Мыть радиатор",
+    "type": 0
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "cost": 16477,
+    "createDate": "2021-12-21T15:46:39.059Z",
+    "description": "Только оригинал",
+    "id": "5ec3ff55-477c-4e38-95c8-429c28a0e67e",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 60,
+    "skippedJobsOn": [],
+    "title": "Замена масла в коробке",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [],
+    "createDate": "2021-12-07T07:13:13.886Z",
+    "description": "если Haldex 4 поколения - то фильтр от Вольво, если 5ого - ремкомплект подкачивающего насоса с уплотнителями",
+    "id": "5f0e4616-13c4-4340-9906-231bbf21b28f",
+    "justOnce": false,
+    "optionalJobsOn": [],
+    "planValue": 60,
+    "skippedJobsOn": [],
+    "title": "Замена масла в муфте Haldex",
+    "type": 1
+  },
+  {
+    "colorType": 1,
+    "complitedJobs": [
+      {
+        "value": 9
+      }
+    ],
+    "cost": 1609,
+    "createDate": "2021-12-21T15:51:11.672Z",
+    "description": "В масляную систему\nLIQUI MOLY Cera Tec",
+    "id": "c2ad70a7-242b-4a9e-994f-eb514b35ebec",
+    "justOnce": false,
+    "optionalJobsOn": [9],
+    "planValue": 30,
+    "skippedJobsOn": [],
+    "title": "Антифрикционная присадка",
+    "type": 1
+  }
 ]

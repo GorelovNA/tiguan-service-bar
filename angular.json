@@ -1,93 +1,76 @@
 {
   "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
-  "version": 1,
+  "cli": {
+    "analytics": "7656ae08-f0f2-4080-b2a5-865e85824c43"
+  },
   "newProjectRoot": "projects",
   "projects": {
     "tiguan-service-bar": {
-      "projectType": "application",
-      "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
-        },
-        "@schematics/angular:application": {
-          "strict": true
-        }
-      },
-      "root": "",
-      "sourceRoot": "src",
-      "prefix": "app",
       "architect": {
         "build": {
           "builder": "@angular-devkit/build-angular:application",
-          "options": {
-            "outputPath": {
-              "base": "dist/tiguan-service-bar"
-            },
-            "index": "src/index.html",
-            "polyfills": [
-              "src/polyfills.ts"
-            ],
-            "tsConfig": "tsconfig.app.json",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
-            "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
-              "src/styles.scss"
-            ],
-            "scripts": [],
-            "serviceWorker": "ngsw-config.json",
-            "extractLicenses": false,
-            "sourceMap": true,
-            "optimization": false,
-            "namedChunks": true,
-            "browser": "src/main.ts",
-            "stylePreprocessorOptions": {
-              "includePaths": [
-                "."
-              ]
-            }
-          },
           "configurations": {
             "production": {
+              "budgets": [
+                {
+                  "maximumError": "1mb",
+                  "maximumWarning": "500kb",
+                  "type": "initial"
+                },
+                {
+                  "maximumError": "4kb",
+                  "maximumWarning": "2kb",
+                  "type": "anyComponentStyle"
+                }
+              ],
+              "extractLicenses": true,
               "fileReplacements": [
                 {
                   "replace": "src/environments/environment.ts",
                   "with": "src/environments/environment.prod.ts"
                 }
               ],
+              "namedChunks": false,
               "optimization": true,
               "outputHashing": "all",
-              "sourceMap": false,
-              "namedChunks": false,
-              "extractLicenses": true,
-              "budgets": [
-                {
-                  "type": "initial",
-                  "maximumWarning": "500kb",
-                  "maximumError": "1mb"
-                },
-                {
-                  "type": "anyComponentStyle",
-                  "maximumWarning": "2kb",
-                  "maximumError": "4kb"
-                }
-              ]
+              "sourceMap": false
             }
           },
-          "defaultConfiguration": ""
-        },
-        "serve": {
-          "builder": "@angular-devkit/build-angular:dev-server",
+          "defaultConfiguration": "",
           "options": {
-            "buildTarget": "tiguan-service-bar:build"
-          },
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
+            "browser": "src/main.ts",
+            "extractLicenses": false,
+            "index": "src/index.html",
+            "namedChunks": true,
+            "optimization": false,
+            "outputPath": {
+              "base": "dist/tiguan-service-bar"
+            },
+            "polyfills": ["src/polyfills.ts"],
+            "scripts": [],
+            "serviceWorker": "ngsw-config.json",
+            "sourceMap": true,
+            "stylePreprocessorOptions": {
+              "includePaths": ["."]
+            },
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
+            ],
+            "tsConfig": "tsconfig.app.json"
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
           "configurations": {
             "production": {
-              "buildTarget": "tiguan-service-bar:build:production"
+              "devServerTarget": "tiguan-service-bar:serve:production"
             }
+          },
+          "options": {
+            "devServerTarget": "tiguan-service-bar:serve",
+            "protractorConfig": "e2e/protractor.conf.js"
           }
         },
         "extract-i18n": {
@@ -96,41 +79,46 @@
             "buildTarget": "tiguan-service-bar:build"
           }
         },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "buildTarget": "tiguan-service-bar:build:production"
+            }
+          },
+          "options": {
+            "buildTarget": "tiguan-service-bar:build"
+          }
+        },
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "assets": ["src/favicon.ico", "src/assets", "src/manifest.webmanifest"],
+            "karmaConfig": "karma.conf.js",
             "main": "src/test.ts",
             "polyfills": "src/polyfills.ts",
-            "tsConfig": "tsconfig.spec.json",
-            "karmaConfig": "karma.conf.js",
-            "assets": [
-              "src/favicon.ico",
-              "src/assets",
-              "src/manifest.webmanifest"
-            ],
+            "scripts": [],
             "styles": [
               "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.scss"
             ],
-            "scripts": []
-          }
-        },
-        "e2e": {
-          "builder": "@angular-devkit/build-angular:protractor",
-          "options": {
-            "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "tiguan-service-bar:serve"
-          },
-          "configurations": {
-            "production": {
-              "devServerTarget": "tiguan-service-bar:serve:production"
-            }
+            "tsConfig": "tsconfig.spec.json"
           }
         }
-      }
+      },
+      "prefix": "app",
+      "projectType": "application",
+      "root": "",
+      "schematics": {
+        "@schematics/angular:application": {
+          "strict": true
+        },
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "sourceRoot": "src"
     }
   },
-  "cli": {
-    "analytics": "7656ae08-f0f2-4080-b2a5-865e85824c43"
-  }
+  "version": 1
 }

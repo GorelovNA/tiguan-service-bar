@@ -5,18 +5,21 @@ import { tap } from 'rxjs/operators';
 import { AuthService } from './auth.service';
 
 @Injectable({
-    providedIn: 'root',
+  providedIn: 'root'
 })
-export class AuthGuard  {
-    constructor(private router: Router, private authService: AuthService) { }
+export class AuthGuard {
+  constructor(
+    private router: Router,
+    private authService: AuthService
+  ) {}
 
-    canActivate(): Observable<boolean> {
-        return this.authService.isAuthorized$.pipe(
-            tap((isAuthorized) => {
-                if (!isAuthorized) {
-                    this.router.navigate(['/login']);
-                }
-            }),
-        );
-    }
+  canActivate(): Observable<boolean> {
+    return this.authService.isAuthorized$.pipe(
+      tap(isAuthorized => {
+        if (!isAuthorized) {
+          this.router.navigate(['/login']);
+        }
+      })
+    );
+  }
 }

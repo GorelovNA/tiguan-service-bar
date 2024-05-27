@@ -1,36 +1,48 @@
 <div class="user-info">
-    Роль: {{ user$ | async }}
-    <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+  Роль: {{ user$ | async }}
+  <button mat-raised-button color="primary" (click)="logout()">Logout</button>
 </div>
 <ng-container *ngIf="!isLoading; else showSpinner">
-    <hr>
+  <hr />
 
-    <ng-container *ngIf="(kmJobs$ | async) as kmJobs">
-        <app-progress-bar *ngIf="kmJobs.length" [jobs]="kmJobs" [currentValue]="currentKmValue" (jobCompliteChanged)="onJobCompliteChanged($event)"></app-progress-bar>
-    </ng-container>
-    <hr>
-    <ng-container *ngIf="(timeJobs$ | async) as timeJobs">
-        <app-progress-bar *ngIf="timeJobs.length" [jobs]="timeJobs" [currentValue]="possTime" (jobCompliteChanged)="onJobCompliteChanged($event)"></app-progress-bar>
-    </ng-container>
+  <ng-container *ngIf="kmJobs$ | async as kmJobs">
+    <app-progress-bar
+      *ngIf="kmJobs.length"
+      [jobs]="kmJobs"
+      [currentValue]="currentKmValue"
+      (jobCompliteChanged)="onJobCompliteChanged($event)"
+    ></app-progress-bar>
+  </ng-container>
+  <hr />
+  <ng-container *ngIf="timeJobs$ | async as timeJobs">
+    <app-progress-bar
+      *ngIf="timeJobs.length"
+      [jobs]="timeJobs"
+      [currentValue]="possTime"
+      (jobCompliteChanged)="onJobCompliteChanged($event)"
+    ></app-progress-bar>
+  </ng-container>
 
-    <br>
-    <hr>
-    <br>
+  <br />
+  <hr />
+  <br />
 
-    <h2>Service jobs list</h2>
-    <button mat-raised-button color="primary" (click)="add()" [disabled]="!(isAdmin$ | async)">Add job</button>
+  <h2>Service jobs list</h2>
+  <button mat-raised-button color="primary" (click)="add()" [disabled]="!(isAdmin$ | async)">
+    Add job
+  </button>
 
-    <br>
-    <br>
+  <br />
+  <br />
 
-    <app-job-list
-        *ngIf="jobList?.length"
-        [jobs]="allJobs$ | async"
-        (edited)="onEdit($event)"
-        (deleted)="onDelete($event)"
-    ></app-job-list>
+  <app-job-list
+    *ngIf="jobList?.length"
+    [jobs]="allJobs$ | async"
+    (edited)="onEdit($event)"
+    (deleted)="onDelete($event)"
+  ></app-job-list>
 </ng-container>
 
 <ng-template #showSpinner>
-    <mat-spinner></mat-spinner>
+  <mat-spinner></mat-spinner>
 </ng-template>
