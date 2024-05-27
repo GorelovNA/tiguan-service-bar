@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
 import { AuthService } from '../core/auth.service';
 @Injectable({
   providedIn: 'root'
@@ -12,14 +10,11 @@ export class LoginPageGuard {
     private authService: AuthService
   ) {}
 
-  canActivate(): Observable<boolean> {
-    return this.authService.isAuthorized$.pipe(
-      tap(isAuthorized => {
-        if (isAuthorized) {
-          this.router.navigate(['/']);
-        }
-      }),
-      map(isAuthorized => !isAuthorized)
-    );
+  canActivate(): boolean {
+    if (this.authService.isAuthorized()) {
+      this.router.navigate(['/']);
+    }
+
+    return !this.authService.isAuthorized();
   }
 }

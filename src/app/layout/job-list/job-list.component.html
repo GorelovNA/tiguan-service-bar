@@ -134,7 +134,7 @@
               mat-icon-button
               color="accent"
               (click)="edited.emit(element.id)"
-              [disabled]="!(isAdmin$ | async)"
+              [disabled]="!isAdmin"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -142,7 +142,7 @@
               mat-icon-button
               color="warn"
               (click)="deleted.emit(element.id)"
-              [disabled]="!(isAdmin$ | async)"
+              [disabled]="!isAdmin"
             >
               <mat-icon>delete</mat-icon>
             </button>
@@ -289,7 +289,7 @@
               mat-icon-button
               color="accent"
               (click)="edited.emit(element.id)"
-              [disabled]="!(isAdmin$ | async)"
+              [disabled]="!isAdmin"
             >
               <mat-icon>edit</mat-icon>
             </button>
@@ -297,7 +297,7 @@
               mat-icon-button
               color="warn"
               (click)="deleted.emit(element.id)"
-              [disabled]="!(isAdmin$ | async)"
+              [disabled]="!isAdmin"
             >
               <mat-icon>delete</mat-icon>
             </button>

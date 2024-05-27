@@ -1,5 +1,5 @@
 <div class="user-info">
-  Роль: {{ user$ | async }}
+  Роль: {{ userRole() }}
   <button mat-raised-button color="primary" (click)="logout()">Logout</button>
 </div>
 <ng-container *ngIf="!isLoading; else showSpinner">
@@ -26,9 +26,7 @@
   <br />
 
   <h2>Service jobs list</h2>
-  <button mat-raised-button color="primary" (click)="add()" [disabled]="!(isAdmin$ | async)">
-    Add job
-  </button>
+  <button mat-raised-button color="primary" (click)="add()" [disabled]="!isAdmin">Add job</button>
 
   <br />
   <br />

@@ -35,7 +35,7 @@
           <mat-checkbox
             [checked]="element.jobComplited"
             (change)="onCompliteChanged(data.item, element, $event)"
-            [disabled]="!(isAdmin$ | async)"
+            [disabled]="!isAdmin"
           ></mat-checkbox>
         </td>
       </ng-container>

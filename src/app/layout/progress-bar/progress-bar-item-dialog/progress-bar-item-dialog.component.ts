@@ -23,7 +23,7 @@ import { AuthService } from '../../../core/auth.service';
 export class ProgressBarItemDialogComponent extends BaseComponent {
   ColorType = ColorType;
 
-  isAdmin$: Observable<boolean> = this.authService.isAdmin$;
+  isAdmin = this.authService.isAdmin;
 
   get jobList(): Job[] {
     return this.jobsService.jobsSubject$.value || [];

@@ -22,9 +22,9 @@ export class LayoutComponent extends BaseComponent implements OnInit {
   kmJobs$: Observable<Job[]> = this.jobsService.kmJobs$;
   timeJobs$: Observable<Job[]> = this.jobsService.timeJobs$;
 
-  user$ = this.authService.userRole$;
+  userRole = this.authService.userRole;
 
-  isAdmin$: Observable<boolean> = this.authService.isAdmin$;
+  isAdmin = this.authService.isAdmin;
 
   currentKmValue = Number(localStorage.getItem('currentKmValue') || '0');
 

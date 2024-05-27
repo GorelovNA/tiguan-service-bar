@@ -36,7 +36,7 @@ export class JobListComponent implements OnInit, AfterViewInit {
   @Output() edited: EventEmitter<string> = new EventEmitter();
   @Output() deleted: EventEmitter<string> = new EventEmitter();
 
-  isAdmin$: Observable<boolean> = this.authService.isAdmin$;
+  isAdmin = this.authService.isAdmin;
 
   // @ts-ignore
   timeJobs: MatTableDataSource<Job>;

@@ -34,7 +34,7 @@ export interface JobGraphDetails extends Job {
   styleUrls: ['./progress-bar.component.scss']
 })
 export class ProgressBarComponent extends BaseComponent implements OnInit {
-  isAdmin$: Observable<boolean> = this.authService.isAdmin$;
+  isAdmin = this.authService.isAdmin;
 
   jobGraphItems: JobGraphItem[] = [];
 

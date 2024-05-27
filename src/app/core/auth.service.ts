@@ -1,8 +1,6 @@
-import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { Injectable, computed, signal } from '@angular/core';
 import jwtEncode from 'jwt-encode';
 import { jwtDecode } from 'jwt-decode';
-import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 const BASIC_USER_TOKEN = `eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIiLCJwYXNzd29yZCI6InVzZXIifQ.5LEyhafrxC_XHVZh2EX6tpk-C1ow-d_dBkwnc7VODpc`;
@@ -19,12 +17,11 @@ export type Role = 'admin' | 'user' | 'unknown';
   providedIn: 'root'
 })
 export class AuthService {
-  userRole$: BehaviorSubject<Role> = new BehaviorSubject<Role>('unknown');
+  userRole = computed(() => this._userRole());
+  isAuthorized = computed(() => this.userRole() !== 'unknown');
+  isAdmin = computed(() => this.userRole() === 'admin');
 
-  isAuthorized$: Observable<boolean> = this.userRole$
-    .asObservable()
-    .pipe(map(r => r !== 'unknown'));
-  isAdmin$: Observable<boolean> = this.userRole$.asObservable().pipe(map(r => r === 'admin'));
+  private _userRole = signal<Role>('unknown');
 
   constructor(private router: Router) {
     const accessToken = localStorage.getItem('access_token') || '';
@@ -47,10 +44,10 @@ export class AuthService {
     let logined = false;
 
     if (loginToken === BASIC_USER_TOKEN) {
-      this.userRole$.next('user');
+      this._userRole.set('user');
       logined = true;
     } else if (loginToken === ADMIN_USER_TOKEN) {
-      this.userRole$.next('admin');
+      this._userRole.set('admin');
       logined = true;
     } else {
       this.logout();
@@ -65,7 +62,7 @@ export class AuthService {
 
   logout(): void {
     localStorage.removeItem('access_token');
-    this.userRole$.next('unknown');
+    this._userRole.set('unknown');
     this.router.navigate(['/login']);
   }
 }
