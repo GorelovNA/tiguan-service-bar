@@ -35,7 +35,7 @@
 
   <app-job-list
     *ngIf="jobList?.length"
-    [jobs]="allJobs$ | async"
+    [jobs]="(allJobs$ | async)!"
     (edited)="onEdit($event)"
     (deleted)="onDelete($event)"
   ></app-job-list>

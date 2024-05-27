@@ -26,7 +26,7 @@ export class LayoutComponent extends BaseComponent implements OnInit {
 
   isAdmin$: Observable<boolean> = this.authService.isAdmin$;
 
-  currentKmValue = String(localStorage.getItem('currentKmValue') || '0');
+  currentKmValue = Number(localStorage.getItem('currentKmValue') || '0');
 
   isLoading = true;
 

@@ -1,6 +1,5 @@
-import { Component, ElementRef, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { UntypedFormControl } from '@angular/forms';
-import { IFormControl } from '@rxweb/types';
+import { Component, ElementRef, Input, OnInit } from '@angular/core';
+import { FormControl } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { debounceTime, distinctUntilChanged, map, takeUntil } from 'rxjs/operators';
 import { BaseComponent } from 'src/app/shared/base.class';
@@ -8,8 +7,7 @@ import { AuthService } from '../../core/auth.service';
 import { Job, ColorType, JobType } from '../../shared/job.interface';
 import { TIGUAN_PURCHASE_DATE } from '../layout.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { MatCheckboxChange } from '@angular/material/checkbox';
-import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { ProgressBarItemDialogComponent } from './progress-bar-item-dialog/progress-bar-item-dialog.component';
 
 export const MAX_KM_SIZE = 300; // т.км
@@ -46,7 +44,7 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
 
   scaleSteps: { value: number; text: string | Date }[] = [];
 
-  currentValueCtrl: IFormControl<number> = new UntypedFormControl(0);
+  currentValueCtrl: FormControl<number | null> = new FormControl(0);
 
   sliderMaxValue: number = this.isKmType ? 100 : 48;
   sliderMinValue: number = this.isKmType ? 30 : 18;

@@ -2,7 +2,7 @@
   "angularCompilerOptions": {
     "strictInjectionParameters": true,
     "strictInputAccessModifiers": true,
-    "strictTemplates": false
+    "strictTemplates": true
   },
   "compileOnSave": false,
   "compilerOptions": {
@@ -20,6 +20,7 @@
     "outDir": "./dist/out-tsc",
     "sourceMap": true,
     "strict": true,
+    "strictNullChecks": true,
     "target": "ES2022",
     "useDefineForClassFields": false
   }

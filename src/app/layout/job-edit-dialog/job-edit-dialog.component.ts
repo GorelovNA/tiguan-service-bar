@@ -1,10 +1,18 @@
 import { Component, Inject } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormControl, Validators } from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IFormArray, IFormBuilder, IFormGroup } from '@rxweb/types';
 import { Job, JobType, ColorType } from '../../shared/job.interface';
 import { v4 as uuidv4 } from 'uuid';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
+
+export type FormGroupType<T> = {
+  [K in keyof T]: FormControl<T[K] | null>;
+};
+
+type JobFormType = Omit<FormGroupType<Job>, 'optionalJobsOn' | 'skippedJobsOn'> & {
+  optionalJobsOn: FormArray<FormControl<number | null>>;
+  skippedJobsOn: FormArray<FormControl<number | null>>;
+};
 
 @Component({
   selector: 'app-job-edit-dialog',
@@ -12,39 +20,38 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
   styleUrls: ['./job-edit-dialog.component.scss']
 })
 export class JobEditDialogComponent {
-  form: IFormGroup<Job>;
+  form: FormGroup<JobFormType>;
 
   jobType = JobType;
   colorType = ColorType;
 
   get type(): JobType {
-    return this.form.getRawValue().type;
+    return this.form.getRawValue().type!;
   }
 
-  get optionalJobsFormArray(): IFormArray<number> {
-    return this.form.controls.optionalJobsOn as IFormArray<number>;
+  get optionalJobsFormArray(): FormArray<FormControl<number | null>> {
+    return this.form.controls.optionalJobsOn;
   }
-  get skippedJobsFormArray(): IFormArray<number> {
-    return this.form.controls.skippedJobsOn as IFormArray<number>;
+  get skippedJobsFormArray(): FormArray<FormControl<number | null>> {
+    return this.form.controls.skippedJobsOn;
   }
 
   constructor(
-    private fb: UntypedFormBuilder,
     public dialogRef: MatDialogRef<JobEditDialogComponent>,
     @Inject(MAT_DIALOG_DATA) public data: Job | null = null
   ) {
-    this.form = (this.fb as IFormBuilder).group<Job>({
-      id: [data?.id || uuidv4()],
-      title: [data?.title || '', Validators.required],
-      type: [!!data ? data.type : JobType.Km, Validators.required],
-      colorType: [!!data ? data.colorType : ColorType.Zamena, Validators.required],
-      planValue: [data?.planValue || null, Validators.required],
-      description: [data?.description || ''],
-      cost: [data?.cost || null],
+    this.form = new FormGroup<JobFormType>({
+      id: new FormControl(data?.id || uuidv4()),
+      title: new FormControl(data?.title || '', Validators.required),
+      type: new FormControl(!!data ? data.type : JobType.Km, Validators.required),
+      colorType: new FormControl(!!data ? data.colorType : ColorType.Zamena, Validators.required),
+      planValue: new FormControl(data?.planValue || null, Validators.required),
+      description: new FormControl(data?.description || ''),
+      cost: new FormControl(data?.cost || null),
       optionalJobsOn: this.buildFormArray(data?.optionalJobsOn || []),
       skippedJobsOn: this.buildFormArray(data?.skippedJobsOn || []),
-      justOnce: [data?.justOnce || false],
-      complitedJobs: [!!data ? data.complitedJobs || [] : []]
+      justOnce: new FormControl(data?.justOnce || false),
+      complitedJobs: new FormControl(!!data ? data.complitedJobs || [] : [])
     });
 
     this.form.valueChanges.subscribe(console.log);
@@ -57,26 +64,26 @@ export class JobEditDialogComponent {
       ...formValue,
       createDate: new Date(),
       optionalJobsOn: formValue.optionalJobsOn.sort((a, b) => {
-        return a - b;
+        return a! - b!;
       }),
       skippedJobsOn: formValue.skippedJobsOn.sort((a, b) => {
-        return a - b;
+        return a! - b!;
       })
     } as Job);
   }
 
   addNewOptionalJob(): void {
-    this.optionalJobsFormArray.push(new UntypedFormControl(null, Validators.required));
+    this.optionalJobsFormArray.push(new FormControl(null, Validators.required));
   }
 
   addNewSkippedJob(): void {
-    this.skippedJobsFormArray.push(new UntypedFormControl(null, Validators.required));
+    this.skippedJobsFormArray.push(new FormControl(null, Validators.required));
   }
 
-  private buildFormArray(value: number[]): IFormArray<number> {
-    return (this.fb as IFormBuilder).array(
+  private buildFormArray(value: number[]): FormArray<FormControl<number | null>> {
+    return new FormArray<FormControl<number | null>>(
       value.map(v => {
-        return new UntypedFormControl(v, Validators.required);
+        return new FormControl<number | null>(v!, Validators.required);
       })
     );
   }
