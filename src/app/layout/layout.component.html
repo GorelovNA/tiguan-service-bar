@@ -10,7 +10,6 @@
       *ngIf="kmJobs.length"
       [jobs]="kmJobs"
       [currentValue]="currentKmValue"
-      (jobCompliteChanged)="onJobCompliteChanged($event)"
     ></app-progress-bar>
   </ng-container>
   <hr />
@@ -19,7 +18,6 @@
       *ngIf="timeJobs.length"
       [jobs]="timeJobs"
       [currentValue]="possTime"
-      (jobCompliteChanged)="onJobCompliteChanged($event)"
     ></app-progress-bar>
   </ng-container>
 

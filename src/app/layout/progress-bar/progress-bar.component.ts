@@ -9,11 +9,13 @@ import { Job, ColorType, JobType } from '../../shared/job.interface';
 import { TIGUAN_PURCHASE_DATE } from '../layout.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { MatCheckboxChange } from '@angular/material/checkbox';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
+import { ProgressBarItemDialogComponent } from './progress-bar-item-dialog/progress-bar-item-dialog.component';
 
 export const MAX_KM_SIZE = 300; // т.км
 export const MAX_TIME_SIZE = 84; // мес (7лет)
 
-interface JobGraphItem {
+export interface JobGraphItem {
   value: number; // итоговый пробег / время
   jobs: JobGraphDetails[]; // работы на данном пробеге / времени
   icon: string;
@@ -167,13 +169,11 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
     });
   }
 
-  @Output() jobCompliteChanged: EventEmitter<{ job: JobGraphDetails; checked: boolean }> =
-    new EventEmitter();
-
   constructor(
     private element: ElementRef<HTMLElement>,
     private authService: AuthService,
-    private breakpointObserver: BreakpointObserver
+    private breakpointObserver: BreakpointObserver,
+    private dialog: MatDialog
   ) {
     super();
   }
@@ -240,19 +240,15 @@ export class ProgressBarComponent extends BaseComponent implements OnInit {
     }
   }
 
-  onCompliteChanged(item: JobGraphItem, job: JobGraphDetails, event: MatCheckboxChange): void {
-    job.jobComplited = event.checked;
-    item.complited = item.jobs.every(j => j.jobComplited);
-
-    this.jobCompliteChanged.emit({
-      job,
-      checked: event.checked
+  openItemDialog(item: JobGraphItem): void {
+    this.dialog.open(ProgressBarItemDialogComponent, {
+      data: {
+        item,
+        isKmType: this.isKmType
+      },
+      maxWidth: '100vw',
+      width: '1000px'
     });
-  }
-
-  getDateByValue(value: number): Date {
-    const startDate = new Date(TIGUAN_PURCHASE_DATE.getTime());
-    return new Date(startDate.setMonth(startDate.getMonth() + value));
   }
 
   private getJobIcon(item: JobGraphItem): string {

@@ -4,7 +4,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { catchError, filter, map, mapTo, tap } from 'rxjs/operators';
 import { Job, JobType } from '../shared/job.interface';
 
-@Injectable()
+@Injectable({ providedIn: 'root' })
 export class JobsService {
   jobsSubject$: BehaviorSubject<Job[] | null> = new BehaviorSubject<Job[] | null>(null);
 

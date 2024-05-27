@@ -1,0 +1,53 @@
+<div class="dialog-header">
+  <h2>Работы на пробеге: {{ data.item.value }} {{ data.isKmType ? 'т.км' : 'мес' }}</h2>
+  <button mat-icon-button color="secondary" (click)="dialogRef.close()">
+    <mat-icon>close</mat-icon>
+  </button>
+</div>
+<mat-dialog-content>
+  <div class="preview">
+    <h3 *ngIf="!data.isKmType">{{ getDateByValue(data.item.value) | date: 'MMM y' }}</h3>
+    <h4 *ngIf="data.item.fullCost">Общая стоимость: {{ data.item.fullCost }} ₽</h4>
+    <table mat-table [dataSource]="data.item.jobs">
+      <ng-container matColumnDef="title">
+        <th mat-header-cell *matHeaderCellDef>Название</th>
+        <td mat-cell *matCellDef="let element">{{ element.title }}</td>
+      </ng-container>
+      <ng-container matColumnDef="colorType">
+        <th mat-header-cell *matHeaderCellDef>Вид работ</th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.colorType === ColorType.Prisadka ? 'Присадка' : 'Замена' }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="description">
+        <th mat-header-cell *matHeaderCellDef>Комментарий</th>
+        <td mat-cell *matCellDef="let element" class="description-cell">
+          {{ element.description }}
+        </td>
+      </ng-container>
+      <ng-container matColumnDef="cost">
+        <th mat-header-cell *matHeaderCellDef>Стоимость, ₽</th>
+        <td mat-cell *matCellDef="let element">{{ element.cost }}</td>
+      </ng-container>
+      <ng-container matColumnDef="complited">
+        <th mat-header-cell *matHeaderCellDef>Работы выполнены</th>
+        <td mat-cell *matCellDef="let element">
+          <mat-checkbox
+            [checked]="element.jobComplited"
+            (change)="onCompliteChanged(data.item, element, $event)"
+            [disabled]="!(isAdmin$ | async)"
+          ></mat-checkbox>
+        </td>
+      </ng-container>
+
+      <tr
+        mat-header-row
+        *matHeaderRowDef="['title', 'colorType', 'description', 'cost', 'complited']"
+      ></tr>
+      <tr
+        mat-row
+        *matRowDef="let row; columns: ['title', 'colorType', 'description', 'cost', 'complited']"
+      ></tr>
+    </table>
+  </div>
+</mat-dialog-content>

@@ -12,49 +12,6 @@ h4 {
   margin-bottom: 4px !important;
 }
 
-.tooltip.show {
-  opacity: 1 !important;
-}
-
-.tooltip {
-  @include media-breakpoint-down(md) {
-    position: fixed !important;
-    top: 50% !important;
-    left: 0px !important;
-    transform: translate(0, -50%) !important;
-    width: 100% !important;
-
-    .arrow {
-      display: none;
-    }
-
-    .preview {
-      overflow-x: auto;
-
-      .mat-mdc-table {
-        width: 100%;
-      }
-    }
-  }
-}
-
-.tooltip-inner {
-  max-width: none !important;
-
-  .mat-mdc-table {
-    min-width: 350px;
-
-    .mat-mdc-cell,
-    .mat-mdc-header-cell {
-      padding: 0 15px;
-
-      &.description-cell {
-        white-space: pre-line;
-      }
-    }
-  }
-}
-
 td.mat-mdc-cell,
 th.mat-mdc-header-cell {
   padding: 2px 4px !important;

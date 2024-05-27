@@ -4,7 +4,6 @@ import { Observable } from 'rxjs';
 import { AuthService } from '../core/auth.service';
 import { Job } from '../shared/job.interface';
 import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
-import { JobGraphDetails } from './progress-bar/progress-bar.component';
 import { JobsService } from './jobs.service';
 import { BaseComponent } from '../shared/base.class';
 import { MatDialog } from '@angular/material/dialog';
@@ -14,8 +13,7 @@ export const TIGUAN_PURCHASE_DATE: Date = new Date(2021, 3, 1); // 1 Apr 21
 @Component({
   selector: 'app-layout',
   templateUrl: './layout.component.html',
-  styleUrls: ['./layout.component.scss'],
-  providers: [JobsService]
+  styleUrls: ['./layout.component.scss']
 })
 export class LayoutComponent extends BaseComponent implements OnInit {
   allJobs$: Observable<Job[]> = this.jobsService.jobsSubject$
@@ -79,19 +77,6 @@ export class LayoutComponent extends BaseComponent implements OnInit {
 
   onDelete(id: string): void {
     this.jobsService.jobsSubject$.next(this.jobList.filter(j => j.id !== id));
-  }
-
-  onJobCompliteChanged(event: { job: JobGraphDetails; checked: boolean }): void {
-    const existedJob = this.jobList.find(j => j.id === event.job.id);
-    if (!event.checked) {
-      existedJob!.complitedJobs = existedJob!.complitedJobs.filter(
-        c => c.value !== event.job.value
-      );
-    } else {
-      existedJob!.complitedJobs.push({ value: event.job.value });
-    }
-
-    this.saveJobs(this.jobList);
   }
 
   logout(): void {

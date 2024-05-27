@@ -1,0 +1,17 @@
+.dialog-header {
+  display: flex;
+  justify-content: space-between;
+
+  h2 {
+    padding-top: 10px;
+    padding-left: 24px;
+  }
+}
+
+.preview {
+  overflow-x: auto;
+
+  .mat-mdc-table {
+    width: 100%;
+  }
+}
