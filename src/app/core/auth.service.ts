@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-const jwtEncode = require('jwt-encode');
+// const jwtEncode = require('jwt-encode');
+import jwtEncode from "jwt-encode";
 import { jwtDecode } from "jwt-decode";
 import { map } from 'rxjs/operators';
 import { Router } from '@angular/router';

@@ -29,7 +29,7 @@
     </div>
 
     <div class="items-container">
-        <div class="item" *ngFor="let item of jobGraphItems" [style.left]="getItemMargin(item.value) + '%'" [ngbTooltip]="tipContent" container="body" triggers="click" [autoClose]="'outside'">
+        <div class="item" *ngFor="let item of jobGraphItems" [style.left]="getItemMargin(item.value) + '%'" container="body" triggers="click" [autoClose]="'outside'">
             <mat-icon
                 [matBadge]="item.jobs.length"
                 matBadgeColor="warn"
@@ -39,6 +39,8 @@
                 [class.complited]="item.complited"
             >{{ item.icon }}</mat-icon>
 
+
+            <!-- TODO -->
             <ng-template #tipContent>
                 <div class="preview">
                     <h2>Работы на пробеге: {{ item.value }} {{isKmType ? 'т.км' : 'мес'}}</h2>

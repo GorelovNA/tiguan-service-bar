@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MaterialModule } from '../shared/material.module';
 import { JobEditDialogComponent } from './job-edit-dialog/job-edit-dialog.component';
 import { JobListComponent } from './job-list/job-list.component';
@@ -23,8 +22,7 @@ import { ProgressBarComponent } from './progress-bar/progress-bar.component';
         CommonModule,
         FormsModule,
         ReactiveFormsModule,
-        MaterialModule,
-        NgbModule
+        MaterialModule
     ],
 })
 export class LayoutModule { }
