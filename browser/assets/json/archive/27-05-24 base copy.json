@@ -1,0 +1,333 @@
+{
+  "metadata": {
+    "createdAt": "2022-07-11T10:49:31.836Z",
+    "id": "61ba0d0c0ddbee6f8b1e65a1",
+    "private": true
+  },
+  "record": [
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 21
+        },
+        {
+          "value": 15
+        },
+        {
+          "value": 9
+        },
+        {
+          "value": 3
+        },
+        {
+          "value": 27
+        },
+        {
+          "value": 33
+        },
+        {
+          "value": 32
+        },
+        {
+          "value": 39
+        },
+        {
+          "value": 42
+        },
+        {
+          "value": 36
+        },
+        {
+          "value": 30
+        },
+        {
+          "value": 24
+        },
+        {
+          "value": 18
+        },
+        {
+          "value": 6
+        },
+        {
+          "value": 12
+        }
+      ],
+      "cost": 10600,
+      "createDate": "2024-02-12T13:36:35.015Z",
+      "description": "Масло (Mobil1 0w20) 5,7л\nФильтр масляный 06L115562B (аналог - MANN HU6013Z)\nПробка с уплот. кольцом масляного поддона 06L103801",
+      "id": "cd3d233e-7828-4006-bca5-650f428127b6",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 6,
+      "skippedJobsOn": [],
+      "title": "Замена масла в двигателе",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 33
+        }
+      ],
+      "cost": 1800,
+      "createDate": "2022-09-14T16:19:09.065Z",
+      "description": "LIQUI MOLY 7592 Oilsystem Spulung High Performance Benzin\nЗалить на прогретом масло, дать поработать на ХХ 10мин, заменить масло и фильтр (не ездить под очистителем!)",
+      "id": "e7932cae-16f0-4e8e-9d9b-67e17c65d829",
+      "justOnce": false,
+      "optionalJobsOn": [33],
+      "planValue": 37.5,
+      "skippedJobsOn": [],
+      "title": "Промывка масляной системы",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 12
+        },
+        {
+          "value": 24
+        },
+        {
+          "value": 36
+        }
+      ],
+      "cost": 3000,
+      "createDate": "2023-04-14T13:31:33.200Z",
+      "description": "Оригинал 5Q0129620(B/C), C - для холодного климата\nMann C3000(5/4), 4 - для холодного климата (MANN сложно проверить на подлинность)",
+      "id": "10f0e7b1-0270-4d3c-8c89-d782460f9831",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 12,
+      "skippedJobsOn": [],
+      "title": "Воздушный фильтр",
+      "type": 0
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 12
+        },
+        {
+          "value": 24
+        },
+        {
+          "value": 36
+        }
+      ],
+      "cost": 2770,
+      "createDate": "2023-04-14T13:54:06.988Z",
+      "description": "Гипоалергенный лучше угольного.\nОригинал 5Q0819653 - угольный\nMANN FP26009 - гипоалергенный, CUK26009 - угольный. ",
+      "id": "7511c66d-7a31-4087-9ced-8439bde68975",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 12,
+      "skippedJobsOn": [],
+      "title": "Салонный фильтр",
+      "type": 0
+    },
+    {
+      "colorType": 0,
+      "complitedJobs": [
+        {
+          "value": 19
+        },
+        {
+          "value": 9
+        },
+        {
+          "value": 29
+        },
+        {
+          "value": 39
+        }
+      ],
+      "cost": 1000,
+      "createDate": "2022-02-18T15:15:39.510Z",
+      "description": "P1101 PRO-TEC Очиститель топливной системы / Fuel Line Cleaner\n* заказывал у VAG Center спб",
+      "id": "6f9c331a-387a-48a9-9aa6-73660e34dc0b",
+      "justOnce": false,
+      "optionalJobsOn": [9],
+      "planValue": 10,
+      "skippedJobsOn": [],
+      "title": "Присадка в топливную систему",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 30
+        }
+      ],
+      "cost": 8,
+      "createDate": "2024-01-15T17:42:47.175Z",
+      "description": "Оригинал VAG (NGK) 06K905601B",
+      "id": "3826c77e-297e-4466-82b1-7ae074a00531",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 30,
+      "skippedJobsOn": [],
+      "title": "Свечи зажигания",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [],
+      "createDate": "2021-12-06T17:24:01.273Z",
+      "description": "Проверить, если плохо - заменить (по регламенту должна до 140ткм ходить)",
+      "id": "63d2e3d3-5f3b-4c52-a60c-1690b0edbe8f",
+      "justOnce": true,
+      "optionalJobsOn": [],
+      "planValue": 100,
+      "skippedJobsOn": [],
+      "title": "Проверить цепь ГРМ",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [],
+      "createDate": "2021-12-06T17:27:31.615Z",
+      "description": "Оригинал\nЗамена раз в 5 лет либо по износу",
+      "id": "182f65ca-7c6c-410c-9df4-a18e9d468012",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 60,
+      "skippedJobsOn": [],
+      "title": "Приводной ремень",
+      "type": 0
+    },
+    {
+      "colorType": 0,
+      "complitedJobs": [],
+      "createDate": "2021-12-06T17:41:09.070Z",
+      "description": "GZOX",
+      "id": "05753e17-8886-4439-9271-ebcc31181f98",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 80,
+      "skippedJobsOn": [],
+      "title": "Мыть впуск / Раскоксовка",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [],
+      "cost": null,
+      "createDate": "2024-05-05T09:49:54.349Z",
+      "description": "VW G12 EVO (с осени 2020)\nG12E050A2 - готовая смесь\nG12E050М2 - концентрат (разбавляется дистилированной водой)",
+      "id": "d89f969e-6da7-45c7-9d79-a7128dd43238",
+      "justOnce": false,
+      "optionalJobsOn": [36],
+      "planValue": 24,
+      "skippedJobsOn": [24],
+      "title": "Замена антифриза",
+      "type": 0
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [],
+      "createDate": "2021-12-06T17:52:00.645Z",
+      "description": "Очиститель наружной поверхности радиатора Kuhler Aussenreiniger + кёрхер под маленьким давлением",
+      "id": "d0eb7c37-959e-4687-acd8-732bf33572eb",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 24,
+      "skippedJobsOn": [],
+      "title": "Мыть радиатор",
+      "type": 0
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [],
+      "cost": 16477,
+      "createDate": "2021-12-21T15:46:39.059Z",
+      "description": "Только оригинал",
+      "id": "5ec3ff55-477c-4e38-95c8-429c28a0e67e",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 60,
+      "skippedJobsOn": [],
+      "title": "Замена масла в коробке",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [],
+      "createDate": "2021-12-07T07:13:13.886Z",
+      "description": "если Haldex 4 поколения - то фильтр от Вольво, если 5ого - ремкомплект подкачивающего насоса с уплотнителями",
+      "id": "5f0e4616-13c4-4340-9906-231bbf21b28f",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 60,
+      "skippedJobsOn": [],
+      "title": "Замена масла в муфте Haldex",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 9
+        }
+      ],
+      "cost": 1609,
+      "createDate": "2021-12-21T15:51:11.672Z",
+      "description": "В масляную систему\nLIQUI MOLY Cera Tec",
+      "id": "c2ad70a7-242b-4a9e-994f-eb514b35ebec",
+      "justOnce": false,
+      "optionalJobsOn": [9],
+      "planValue": 30,
+      "skippedJobsOn": [],
+      "title": "Антифрикционная присадка",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 45
+        }
+      ],
+      "cost": null,
+      "createDate": "2023-04-18T17:25:53.769Z",
+      "description": "Перед - с датчиком, зад - без\nОригинал перед - VAG (8V0 698 151 C)\nАналог перед - ATE 13.0460-2764.2\nАналог перед - TRW GDB1956, GDB1918 == GDB2114 (разобраться между этими тремя, походу вторая пара)\n\nОригинал зад - VAG (3Q0 698 451 C)\nАналог зад - ATE 13.0460-7294.2\nAналог зад - TRW GDB1957 (дешевле?)",
+      "id": "91da1803-ba8b-4558-b3da-715b61bba2fe",
+      "justOnce": false,
+      "optionalJobsOn": [],
+      "planValue": 45,
+      "skippedJobsOn": [],
+      "title": "Проверка/замена колодок",
+      "type": 1
+    },
+    {
+      "colorType": 1,
+      "complitedJobs": [
+        {
+          "value": 12
+        },
+        {
+          "value": 11
+        },
+        {
+          "value": 35
+        }
+      ],
+      "cost": null,
+      "createDate": "2023-11-30T18:32:23.268Z",
+      "description": "Передние:\nОрига - VAG 5NB998002\nАналог - BOSCH 3397014244\n\n-----\n\nЗадние:\nОрига - VAG 5NA955427A\nАналог - BOSCH A383H 3397016087",
+      "id": "3cde2fdf-407f-45fd-89fd-a46d0041cdbd",
+      "justOnce": false,
+      "optionalJobsOn": [11],
+      "planValue": 12,
+      "skippedJobsOn": [],
+      "title": "Щётка стеклоомывателя",
+      "type": 0
+    }
+  ]
+}
