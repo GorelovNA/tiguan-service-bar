@@ -10,7 +10,7 @@
     "e2e": "ng e2e",
     "format-aux": "prettier",
     "format": "npm run format-aux -- --write .",
-    "deploy-gh": "ng build --configuration production --base-href https://gorelovna.github.io/tiguan-service-bar/ && ngh --dir=dist/tiguan-service-bar"
+    "deploy-gh": "ng build --configuration production --base-href https://gorelovna.github.io/tiguan-service-bar/ && ngh --dir=dist/tiguan-service-bar/browser"
   },
   "private": true,
   "dependencies": {
