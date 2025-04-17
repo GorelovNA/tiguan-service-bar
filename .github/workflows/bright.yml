@@ -1,0 +1,68 @@
+name: Security Tests
+
+on:
+  pull_request:
+    branches:
+      - '*'
+
+permissions:
+  checks: write
+  contents: read
+  id-token: write
+
+jobs:
+  security-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [18.x, 22.x]
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ matrix.node-version }}
+
+    - name: Install dependencies
+      if: matrix.node-version == '18.x'
+      run: npm ci
+
+    - name: Start application
+      if: matrix.node-version == '18.x'
+      run: npm start &
+
+    - name: Wait for application to be ready
+      if: matrix.node-version == '18.x'
+      run: |
+        for i in {1..30}; do
+          nc -zv 127.0.0.1 4200 && echo "Application is ready" && exit 0
+          sleep 2
+        done
+        echo "Application did not start in time" && exit 1
+
+    - name: Install SecTesterJS dependencies
+      if: matrix.node-version == '22.x'
+      run: npm i --prefix .brightsec --save=false @sectester/core @sectester/repeater @sectester/scan @sectester/runner
+
+    - name: Configure Bright credentials
+      if: matrix.node-version == '22.x'
+      uses: ./.github/workflows/composite/configure-bright-credentials
+      with:
+        BRIGHT_HOSTNAME: development.playground.brightsec.com
+        BRIGHT_PROJECT_ID: gwz9YdzypMJY3vAS9iAsmA
+        BRIGHT_TOKEN: ${{ secrets.BRIGHT_TOKEN }}
+
+    - name: Run security tests
+      if: matrix.node-version == '22.x'
+      env:
+        BRIGHT_HOSTNAME: development.playground.brightsec.com
+        BRIGHT_PROJECT_ID: gwz9YdzypMJY3vAS9iAsmA
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        BRIGHT_TOKEN: ${{ env.BRIGHT_TOKEN }}
+        BRIGHT_TARGET_URL: http://127.0.0.1:4200
+      run: |
+        node --experimental-transform-types --experimental-strip-types --experimental-detect-module \
+        --disable-warning=MODULE_TYPELESS_PACKAGE_JSON --disable-warning=ExperimentalWarning \
+        --test-force-exit --test .brightsec/tests/*.test.ts --test-concurrency=4
